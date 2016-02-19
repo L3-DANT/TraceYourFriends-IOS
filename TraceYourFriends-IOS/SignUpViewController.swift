@@ -52,6 +52,27 @@ class SignUpViewController: UIViewController {
             return;
         }
         
+        //Check if email is correct
+        if (!isValidEmail(userEmail!)){
+            displayErrorMessage("Please, enter a correct email")
+        }
+        
+        //Check if password is correct
+        if (userPassword?.characters.count < 6){
+            displayErrorMessage("Please, enter more than 6 characters for the password")
+        }
+        
+        //Check if password contains number
+        
+        let decimalCharacters = NSCharacterSet.decimalDigitCharacterSet()
+        
+        let decimalRange = userPassword?.rangeOfCharacterFromSet(decimalCharacters, options: NSStringCompareOptions(), range: nil)
+        
+        if (decimalRange == nil) {
+            displayErrorMessage("Please, enter at least 1 number")
+        }
+        
+        
         //Store Data
         NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "userName")
         NSUserDefaults.standardUserDefaults().setObject(userEmail, forKey: "userEmail")
@@ -80,6 +101,13 @@ class SignUpViewController: UIViewController {
         
         self.presentViewController(myAlert, animated: true, completion: nil)
     
+    }
+    func isValidEmail(testStr:String) -> Bool {
+        // println("validate calendar: \(testStr)")
+        let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluateWithObject(testStr)
     }
 
 }
