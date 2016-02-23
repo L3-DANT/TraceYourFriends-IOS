@@ -449,6 +449,7 @@
 		03390A0E1C73213B00E97EEB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "";
 				INFOPLIST_FILE = "TraceYourFriends-IOSUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.TraceYourFriends-IOSUITests";
@@ -461,6 +462,7 @@
 		03390A0F1C73213B00E97EEB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "";
 				INFOPLIST_FILE = "TraceYourFriends-IOSUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.TraceYourFriends-IOSUITests";
