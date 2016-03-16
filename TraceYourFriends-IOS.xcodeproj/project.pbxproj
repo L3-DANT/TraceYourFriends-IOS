@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031DED891C996C1100671392 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031DED881C996C1100671392 /* MapKit.framework */; };
+		031DED8B1C997A8600671392 /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031DED8A1C997A8600671392 /* MenuButtonView.swift */; settings = {ASSET_TAGS = (); }; };
 		033909E31C73213B00E97EEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033909E21C73213B00E97EEB /* AppDelegate.swift */; };
 		033909E51C73213B00E97EEB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033909E41C73213B00E97EEB /* ViewController.swift */; };
 		033909E81C73213B00E97EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 033909E61C73213B00E97EEB /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		031DED881C996C1100671392 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		031DED8A1C997A8600671392 /* MenuButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
 		033909DF1C73213B00E97EEB /* TraceYourFriends-IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TraceYourFriends-IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		033909E21C73213B00E97EEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		033909E41C73213B00E97EEB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				031DED891C996C1100671392 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,9 +83,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0305B66D1C7F18C700570B0E /* LoginAndSignUp */ = {
+			isa = PBXGroup;
+			children = (
+				03390A501C7708AD00E97EEB /* LogInViewController.swift */,
+				03390A101C736C0E00E97EEB /* SignUpViewController.swift */,
+			);
+			name = LoginAndSignUp;
+			sourceTree = "<group>";
+		};
 		033909D61C73213B00E97EEB = {
 			isa = PBXGroup;
 			children = (
+				031DED881C996C1100671392 /* MapKit.framework */,
 				033909E11C73213B00E97EEB /* TraceYourFriends-IOS */,
 				033909F61C73213B00E97EEB /* TraceYourFriends-IOSTests */,
 				03390A011C73213B00E97EEB /* TraceYourFriends-IOSUITests */,
@@ -101,14 +116,14 @@
 		033909E11C73213B00E97EEB /* TraceYourFriends-IOS */ = {
 			isa = PBXGroup;
 			children = (
+				0305B66D1C7F18C700570B0E /* LoginAndSignUp */,
 				033909E21C73213B00E97EEB /* AppDelegate.swift */,
 				033909E41C73213B00E97EEB /* ViewController.swift */,
 				033909E61C73213B00E97EEB /* Main.storyboard */,
 				033909E91C73213B00E97EEB /* Assets.xcassets */,
 				033909EB1C73213B00E97EEB /* LaunchScreen.storyboard */,
 				033909EE1C73213B00E97EEB /* Info.plist */,
-				03390A101C736C0E00E97EEB /* SignUpViewController.swift */,
-				03390A501C7708AD00E97EEB /* LogInViewController.swift */,
+				031DED8A1C997A8600671392 /* MenuButtonView.swift */,
 			);
 			path = "TraceYourFriends-IOS";
 			sourceTree = "<group>";
@@ -193,6 +208,7 @@
 		033909D71C73213B00E97EEB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Aniss;
 				TargetAttributes = {
@@ -265,6 +281,7 @@
 				03390A111C736C0E00E97EEB /* SignUpViewController.swift in Sources */,
 				033909E51C73213B00E97EEB /* ViewController.swift in Sources */,
 				033909E31C73213B00E97EEB /* AppDelegate.swift in Sources */,
+				031DED8B1C997A8600671392 /* MenuButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,10 +421,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "TraceYourFriends-IOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.TraceYourFriends-IOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TraceYourFriends-IOS/TraceYourFriends-IOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -415,10 +435,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "TraceYourFriends-IOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.TraceYourFriends-IOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TraceYourFriends-IOS/TraceYourFriends-IOS-Bridging-Header.h";
 			};
 			name = Release;
 		};

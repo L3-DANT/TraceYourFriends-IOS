@@ -31,17 +31,17 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpButtonTapped(sender: AnyObject) {
         
-        let userName:String? = userNameTextField.text
-        let userEmail:String? = userEmailTextField.text
-        let userPassword:String? = userPasswordTextField.text
-        let userPasswordConf:String? = userPasswordConfTextField.text
+        let userName:String! = userNameTextField.text
+        let userEmail:String! = userEmailTextField.text
+        let userPassword:String! = userPasswordTextField.text
+        let userPasswordConf:String! = userPasswordConfTextField.text
         
         //Check the empty fields
         if userName!.isEmpty || userEmail!.isEmpty || userPassword!.isEmpty || userPasswordConf!.isEmpty{
             
             //Error Message
             displayErrorMessage("All fields are required !")
-            return;
+            return
             
         }
         
@@ -49,17 +49,19 @@ class SignUpViewController: UIViewController {
         if(userPassword != userPasswordConf){
             //Error Message
             displayErrorMessage("Password don't match !")
-            return;
+            return
         }
         
         //Check if email is correct
         if (!isValidEmail(userEmail!)){
             displayErrorMessage("Please, enter a correct email")
+            return
         }
         
         //Check if password is correct
         if (userPassword?.characters.count < 6){
             displayErrorMessage("Please, enter more than 6 characters for the password")
+            return
         }
         
         //Check if password contains number
@@ -69,14 +71,15 @@ class SignUpViewController: UIViewController {
         let decimalRange = userPassword?.rangeOfCharacterFromSet(decimalCharacters, options: NSStringCompareOptions(), range: nil)
         
         if (decimalRange == nil) {
-            displayErrorMessage("Please, enter at least 1 number")
+            displayErrorMessage("Please, enter at least one number")
+            return
         }
         
         
                             //======== Send user data to server side ========//
         
         //create the url with NSURL
-        let myUrl = NSURL(string: "http://localhost:8080/SignUp")
+        let myUrl = NSURL(string: "http://localhost:8080/TraceYourFriend/api/users/signup")
         
         //now create the NSMutableRequest object using the url object
         let request = NSMutableURLRequest(URL:myUrl!)

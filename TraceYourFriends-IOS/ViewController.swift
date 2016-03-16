@@ -8,32 +8,40 @@
 
 import UIKit
 
+import MapKit
+
 class ViewController: UIViewController {
 
+    @IBOutlet weak var mapKit: MKMapView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        mapKit.setUserTrackingMode(.Follow, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
 
 
     override func viewDidAppear(animated: Bool) {
-        let isUserLogIn = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+       /*let isUserLogIn = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
         
         if (!isUserLogIn){
             self.performSegueWithIdentifier("LogInView", sender: self)
-        }
+        }*/
     }
     
-    @IBAction func logOutButtonTapped(sender: AnyObject) {
+    
+    
+    
+    /*@IBAction func logOutButtonTapped(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isUserLogIn")
         NSUserDefaults.standardUserDefaults().synchronize()
         
         self.performSegueWithIdentifier("LogInView", sender: self)
-    }
+    }*/
 }
 

@@ -29,18 +29,19 @@ class LogInViewController: UIViewController {
     }
     
     @IBAction func logInButtonTapped(sender: AnyObject) {
-        let userEmail:String? = userEmailTextField.text
-        let userPassword:String? = userPasswordTextField.text
+        let userEmail:String! = userEmailTextField.text
+        let userPassword:String! = userPasswordTextField.text
         
         if((userEmail!.isEmpty) || (userPassword!.isEmpty)){
             displayErrorMessage("User email or password are empty !")
+            return
         }
         
 
                             //======== Send user data to server side ========//
         
         //create the url with NSURL
-        let myUrl = NSURL(string: "http://localhost:8080/LogIn")
+        let myUrl = NSURL(string: "http://localhost:8080/TraceYourFriend/api/LogIn")
         
         //now create the NSMutableRequest object using the url object
         let request = NSMutableURLRequest(URL:myUrl!)

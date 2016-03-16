@@ -8,14 +8,19 @@
 
 import UIKit
 
+import CoreLocation
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let core  = CLLocationManager()
+    
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        core.requestWhenInUseAuthorization()
         return true
     }
 
