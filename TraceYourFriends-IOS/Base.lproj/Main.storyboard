@@ -23,9 +23,52 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZ1-RP-4z6" customClass="ButtonView" customModule="TraceYourFriends_IOS" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZ1-RP-4z6" customClass="ButtonView" customModule="TraceYourFriends_IOS" customModuleProvider="target">
                                 <rect key="frame" x="20" y="500" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Bgw-xT-5TL"/>
+                                    <constraint firstAttribute="height" constant="60" id="yAb-B1-7PQ"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWu-vB-Kdh" customClass="ButtonView" customModule="TraceYourFriends_IOS" customModuleProvider="target">
+                                <rect key="frame" x="100" y="507" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="05x-ta-gfb"/>
+                                    <constraint firstAttribute="height" constant="45" id="eK1-hW-XoV"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAddButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.17282017590000001" green="0.69720740510000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7P-2m-a23" customClass="ButtonView" customModule="TraceYourFriends_IOS" customModuleProvider="target">
+                                <rect key="frame" x="255" y="507" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="VAL-e1-Ow3"/>
+                                    <constraint firstAttribute="height" constant="45" id="hLr-tz-CNh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAddButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.17282017590000001" green="0.69720740510000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsb-HM-LFB" customClass="ButtonView" customModule="TraceYourFriends_IOS" customModuleProvider="target">
+                                <rect key="frame" x="178" y="507" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="LbB-yG-Sgu"/>
+                                    <constraint firstAttribute="width" constant="45" id="lPq-HV-GWO"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAddButton" value="NO"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
                                         <color key="value" red="0.17282017590000001" green="0.69720740510000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
@@ -35,11 +78,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6Hx-eu-C7Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="GlM-nH-4Ol"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="h7P-2m-a23" secondAttribute="bottom" constant="16" id="MO1-lx-j4o"/>
                             <constraint firstItem="v2r-Os-PwP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Mzz-pY-Q9D"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="v2r-Os-PwP" secondAttribute="bottom" id="P2V-kR-Amk"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IZ1-RP-4z6" secondAttribute="bottom" constant="10" id="Ya7-fh-Rnz"/>
                             <constraint firstItem="6Hx-eu-C7Y" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="aaA-S7-Hwp"/>
+                            <constraint firstItem="vWu-vB-Kdh" firstAttribute="leading" secondItem="IZ1-RP-4z6" secondAttribute="trailing" constant="20" id="bUO-L4-Zru"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fsb-HM-LFB" secondAttribute="bottom" constant="16" id="bmh-6P-RF9"/>
                             <constraint firstItem="v2r-Os-PwP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="dWY-M4-KlQ"/>
                             <constraint firstAttribute="trailing" secondItem="v2r-Os-PwP" secondAttribute="trailing" id="huv-wg-JP7"/>
+                            <constraint firstItem="h7P-2m-a23" firstAttribute="leading" secondItem="fsb-HM-LFB" secondAttribute="trailing" constant="20" id="k5P-7K-x9I"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vWu-vB-Kdh" secondAttribute="bottom" constant="16" id="ldd-jL-860"/>
+                            <constraint firstItem="IZ1-RP-4z6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="lqY-Tk-oFf"/>
+                            <constraint firstItem="fsb-HM-LFB" firstAttribute="leading" secondItem="vWu-vB-Kdh" secondAttribute="trailing" constant="20" id="pgE-FP-O4C"/>
                             <constraint firstAttribute="trailing" secondItem="6Hx-eu-C7Y" secondAttribute="trailing" constant="10" id="rRt-ud-uB6"/>
                         </constraints>
                     </view>
