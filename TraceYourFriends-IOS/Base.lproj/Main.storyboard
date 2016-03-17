@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dER-Mz-JMZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
@@ -16,30 +16,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0K-Sj-nSn">
-                                <rect key="frame" x="20" y="269" width="280" height="30"/>
-                                <state key="normal" title="LogOut"/>
-                                <connections>
-                                    <action selector="logOutButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dzM-JG-twa"/>
-                                </connections>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Q21-hJ-zpF">
+                                <rect key="frame" x="40" y="220" width="240" height="128"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QS5-dw-DEj" customClass="ButtonView" customModule="TraceYourFriends_IOS" customModuleProvider="target">
+                                <rect key="frame" x="234" y="496" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="JYs-AE-sdk"/>
+                                    <constraint firstAttribute="height" constant="60" id="rY3-of-Xrc"/>
+                                </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.17282017590000001" green="0.69720740510000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Application Mobile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7h-HT-OhH">
-                                <rect key="frame" x="89" y="28" width="142" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <searchBar contentMode="redraw" misplaced="YES" searchBarStyle="minimal" placeholder="Search on map" translatesAutoresizingMaskIntoConstraints="NO" id="g02-Jh-SUZ">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits" keyboardAppearance="light"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="e7h-HT-OhH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="OgH-c4-1fY"/>
-                            <constraint firstItem="e7h-HT-OhH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="You-de-DB9"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="QS5-dw-DEj" secondAttribute="bottom" constant="20" id="2a4-Ht-kyV"/>
+                            <constraint firstItem="Q21-hJ-zpF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="DRX-B4-NEi"/>
+                            <constraint firstItem="Q21-hJ-zpF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DSK-I7-hSv"/>
+                            <constraint firstItem="g02-Jh-SUZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="Q2G-Ff-pHL"/>
+                            <constraint firstAttribute="trailing" secondItem="g02-Jh-SUZ" secondAttribute="trailing" constant="10" id="U1f-gh-XjZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Q21-hJ-zpF" secondAttribute="trailing" id="jMy-Nc-vAq"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Q21-hJ-zpF" secondAttribute="bottom" id="k7f-L6-ZJb"/>
+                            <constraint firstItem="g02-Jh-SUZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="rY4-Uj-M3R"/>
+                            <constraint firstAttribute="trailing" secondItem="QS5-dw-DEj" secondAttribute="trailing" constant="20" id="ze7-BQ-hB8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pZ7-2Y-esc"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="mapKit" destination="Q21-hJ-zpF" id="8In-ti-TpL"/>
                         <segue destination="4QP-gl-ZDH" kind="presentation" identifier="LogInView" id="bVR-IJ-XoQ"/>
                     </connections>
                 </viewController>
@@ -220,6 +237,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dER-Mz-JMZ" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hJD-5r-FQk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -231,10 +249,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hde-JE-LKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-545" y="68"/>
+            <point key="canvasLocation" x="-549" y="92"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Dut-bw-TYL"/>
+        <segue reference="bVR-IJ-XoQ"/>
     </inferredMetricsTieBreakers>
 </document>

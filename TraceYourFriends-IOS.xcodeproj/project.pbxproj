@@ -16,6 +16,8 @@
 		03390A031C73213B00E97EEB /* TraceYourFriends_IOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03390A021C73213B00E97EEB /* TraceYourFriends_IOSUITests.swift */; };
 		03390A111C736C0E00E97EEB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03390A101C736C0E00E97EEB /* SignUpViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		03390A511C7708AD00E97EEB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03390A501C7708AD00E97EEB /* LogInViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		03B6A4C41C9A9BE50031F8AD /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A4C31C9A9BE50031F8AD /* ButtonView.swift */; settings = {ASSET_TAGS = (); }; };
+		03B6A4C61C9A9C5A0031F8AD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B6A4C51C9A9C5A0031F8AD /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		03390A041C73213B00E97EEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03390A101C736C0E00E97EEB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		03390A501C7708AD00E97EEB /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		03B6A4C31C9A9BE50031F8AD /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		03B6A4C51C9A9C5A0031F8AD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03B6A4C61C9A9C5A0031F8AD /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +86,7 @@
 		033909D61C73213B00E97EEB = {
 			isa = PBXGroup;
 			children = (
+				03B6A4C51C9A9C5A0031F8AD /* MapKit.framework */,
 				033909E11C73213B00E97EEB /* TraceYourFriends-IOS */,
 				033909F61C73213B00E97EEB /* TraceYourFriends-IOSTests */,
 				03390A011C73213B00E97EEB /* TraceYourFriends-IOSUITests */,
@@ -109,6 +115,7 @@
 				033909EE1C73213B00E97EEB /* Info.plist */,
 				03390A101C736C0E00E97EEB /* SignUpViewController.swift */,
 				03390A501C7708AD00E97EEB /* LogInViewController.swift */,
+				03B6A4C31C9A9BE50031F8AD /* ButtonView.swift */,
 			);
 			path = "TraceYourFriends-IOS";
 			sourceTree = "<group>";
@@ -263,6 +270,7 @@
 			files = (
 				03390A511C7708AD00E97EEB /* LogInViewController.swift in Sources */,
 				03390A111C736C0E00E97EEB /* SignUpViewController.swift in Sources */,
+				03B6A4C41C9A9BE50031F8AD /* ButtonView.swift in Sources */,
 				033909E51C73213B00E97EEB /* ViewController.swift in Sources */,
 				033909E31C73213B00E97EEB /* AppDelegate.swift in Sources */,
 			);
