@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		032D3D571CB6595200F1F294 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D561CB6595200F1F294 /* TabBarController.swift */; settings = {ASSET_TAGS = (); }; };
-		032D3D591CB6598400F1F294 /* ContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D581CB6598400F1F294 /* ContactController.swift */; settings = {ASSET_TAGS = (); }; };
-		032D3D5B1CB6599A00F1F294 /* OptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D5A1CB6599A00F1F294 /* OptionController.swift */; settings = {ASSET_TAGS = (); }; };
-		032D3D9D1CBE7EC700F1F294 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D9C1CBE7EC700F1F294 /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		032D3D9F1CBE7EE300F1F294 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D9E1CBE7EE300F1F294 /* SigninViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		031FABF21CE31C9B001622EE /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031FABF11CE31C9B001622EE /* TabBarViewController.swift */; };
+		032D3D571CB6595200F1F294 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D561CB6595200F1F294 /* TabBarController.swift */; };
+		032D3D591CB6598400F1F294 /* ContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D581CB6598400F1F294 /* ContactController.swift */; };
+		032D3D5B1CB6599A00F1F294 /* OptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D5A1CB6599A00F1F294 /* OptionController.swift */; };
+		032D3D9D1CBE7EC700F1F294 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D9C1CBE7EC700F1F294 /* LoginViewController.swift */; };
+		032D3D9F1CBE7EE300F1F294 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D9E1CBE7EE300F1F294 /* SigninViewController.swift */; };
 		03EF0A661CB5342D005F5133 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EF0A651CB5342D005F5133 /* AppDelegate.swift */; };
 		03EF0A681CB5342D005F5133 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EF0A671CB5342D005F5133 /* ViewController.swift */; };
 		03EF0A6B1CB5342D005F5133 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03EF0A691CB5342D005F5133 /* Main.storyboard */; };
@@ -19,8 +20,8 @@
 		03EF0A7B1CB5342D005F5133 /* TraceYourFriend_IOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EF0A7A1CB5342D005F5133 /* TraceYourFriend_IOSTests.swift */; };
 		03EF0A861CB5342D005F5133 /* TraceYourFriend_IOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EF0A851CB5342D005F5133 /* TraceYourFriend_IOSUITests.swift */; };
 		03EF0A941CB53C35005F5133 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EF0A931CB53C35005F5133 /* MapKit.framework */; };
-		03EF0A961CB54270005F5133 /* TraceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EF0A951CB54270005F5133 /* TraceController.swift */; settings = {ASSET_TAGS = (); }; };
-		03EF0A9E1CB55CB5005F5133 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03EF0A9D1CB55CB5005F5133 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		03EF0A961CB54270005F5133 /* TraceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EF0A951CB54270005F5133 /* TraceController.swift */; };
+		03EF0A9E1CB55CB5005F5133 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03EF0A9D1CB55CB5005F5133 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		031FABF11CE31C9B001622EE /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		032D3D561CB6595200F1F294 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		032D3D581CB6598400F1F294 /* ContactController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactController.swift; sourceTree = "<group>"; };
 		032D3D5A1CB6599A00F1F294 /* OptionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				032D3D5A1CB6599A00F1F294 /* OptionController.swift */,
 				032D3D9C1CBE7EC700F1F294 /* LoginViewController.swift */,
 				032D3D9E1CBE7EE300F1F294 /* SigninViewController.swift */,
+				031FABF11CE31C9B001622EE /* TabBarViewController.swift */,
 			);
 			path = "TraceYourFriend-IOS";
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				032D3D5B1CB6599A00F1F294 /* OptionController.swift in Sources */,
 				03EF0A681CB5342D005F5133 /* ViewController.swift in Sources */,
 				032D3D591CB6598400F1F294 /* ContactController.swift in Sources */,
+				031FABF21CE31C9B001622EE /* TabBarViewController.swift in Sources */,
 				032D3D9F1CBE7EE300F1F294 /* SigninViewController.swift in Sources */,
 				032D3D571CB6595200F1F294 /* TabBarController.swift in Sources */,
 				03EF0A961CB54270005F5133 /* TraceController.swift in Sources */,

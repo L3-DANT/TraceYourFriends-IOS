@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1e8-Pf-Lm6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pRj-KT-8Pz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Maps-->
@@ -42,12 +42,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVh-wn-iJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042" y="65"/>
+            <point key="canvasLocation" x="1036" y="-89"/>
         </scene>
         <!--Contacts-->
         <scene sceneID="bwV-t4-1gc">
             <objects>
-                <viewController title="Contacts" id="Obd-iS-HkN" customClass="TabBarController" customModule="TraceYourFriend_IOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Contacts" id="Obd-iS-HkN" customClass="ContactController" customModule="TraceYourFriend_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uog-I9-SWj"/>
                         <viewControllerLayoutGuide type="bottom" id="lsC-oi-mKq"/>
@@ -61,7 +61,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wfd-T8-yac" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1070" y="1131"/>
+            <point key="canvasLocation" x="1494" y="1871"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TwS-El-dzd">
@@ -76,11 +76,12 @@
                         <segue destination="1Tf-4V-jPg" kind="relationship" relationship="viewControllers" id="Big-Eh-6aa"/>
                         <segue destination="Obd-iS-HkN" kind="relationship" relationship="viewControllers" id="dGT-tC-Mtc"/>
                         <segue destination="DbE-Ia-nth" kind="relationship" relationship="viewControllers" id="Gx0-cA-wgL"/>
+                        <segue destination="VGF-BF-PJN" kind="presentation" identifier="logInView" id="KBA-Lj-vEm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B3J-xg-iq0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="268" y="563"/>
+            <point key="canvasLocation" x="268" y="785"/>
         </scene>
         <!--Settings-->
         <scene sceneID="Gd2-r8-OIg">
@@ -93,13 +94,25 @@
                     <view key="view" contentMode="scaleToFill" id="tef-Re-oKf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtF-dJ-clC">
+                                <rect key="frame" x="20" y="497" width="560" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.28132626440000003" blue="0.2623981601" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Disconnect">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutTapped:" destination="DbE-Ia-nth" eventType="touchUpInside" id="99N-wO-yOV"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings" id="Ezo-MT-Rlz"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvU-CI-HQe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="268" y="1355"/>
+            <point key="canvasLocation" x="268" y="2139"/>
         </scene>
         <!--Signin View Controller-->
         <scene sceneID="fMM-tn-zXg">
@@ -261,12 +274,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tf7-1D-BDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1769" y="280"/>
+            <point key="canvasLocation" x="2545" y="10"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="CkC-GY-vbl">
             <objects>
-                <viewController id="VGF-BF-PJN" customClass="LoginViewController" customModule="TraceYourFriend_IOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="VGF-BF-PJN" customClass="LoginViewController" customModule="TraceYourFriend_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E29-1B-JRu"/>
                         <viewControllerLayoutGuide type="bottom" id="z4Y-sa-o8I"/>
@@ -390,7 +403,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Q9-fF-Ycu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2491" y="-409"/>
+            <point key="canvasLocation" x="1853" y="699"/>
         </scene>
     </scenes>
     <resources>
@@ -398,4 +411,7 @@
         <image name="settings" width="25" height="25"/>
         <image name="user_male_circle" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="whR-iH-yyZ"/>
+    </inferredMetricsTieBreakers>
 </document>

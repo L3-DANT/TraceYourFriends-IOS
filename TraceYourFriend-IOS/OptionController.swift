@@ -8,8 +8,9 @@
 
 import UIKit
 
-class OptionController: TabBarController {
+class OptionController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +22,13 @@ class OptionController: TabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func logoutTapped(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isUserLogIn")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
+        self.presentViewController(vc, animated: true, completion: nil)
     }
-    */
 
 }
