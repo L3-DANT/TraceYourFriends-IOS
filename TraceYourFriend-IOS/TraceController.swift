@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class TraceController: TabBarController, MKMapViewDelegate {
+class TraceController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapKit: MKMapView!
     

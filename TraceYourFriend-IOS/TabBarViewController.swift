@@ -1,20 +1,19 @@
 //
-//  ViewController.swift
+//  TabBarViewController.swift
 //  TraceYourFriend-IOS
 //
-//  Created by Aniss on 06/04/2016.
+//  Created by Aniss on 11/05/2016.
 //  Copyright © 2016 Aniss. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
-    
-    
-    
+class TabBarViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,4 +23,3 @@ class ViewController: UIViewController {
     
 
 }
-

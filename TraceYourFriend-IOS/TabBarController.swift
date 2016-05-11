@@ -9,6 +9,8 @@
 import UIKit
 
 class TabBarController: UIViewController {
+    
+    var isUserLogIn = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,5 +23,12 @@ class TabBarController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        isUserLogIn = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+        
+        if (!isUserLogIn){
+            self.performSegueWithIdentifier("logInView", sender: self)
+        }
+    }
 }

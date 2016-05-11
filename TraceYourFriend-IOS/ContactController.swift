@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactController: TabBarController {
+class ContactController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

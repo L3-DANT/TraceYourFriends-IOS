@@ -13,7 +13,6 @@ class SigninViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,13 +78,13 @@ class SigninViewController: UIViewController {
         //Envoi des informations d'enregistrement au serveur
         
         
-        let postEndpoint: String = "https://localhost/users/inscription/"
+        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/inscription"
         
         let url = NSURL(string: postEndpoint)!
         
         let session = NSURLSession.sharedSession()
         
-        let postParams : [String: AnyObject] = ["name": userName, "email": userEmail,"password":userPassword]
+        let postParams : [String: AnyObject] = ["name": userName, "mail": userEmail,"password":userPassword]
         
         
         
@@ -103,7 +102,7 @@ class SigninViewController: UIViewController {
             
         } catch {
             
-            print("ERROR")
+            print("ERROR1")
             
         }
         
@@ -124,13 +123,17 @@ class SigninViewController: UIViewController {
                 
                 print("le POST: " + postString)
                 
-                self.performSelectorOnMainThread("updatePostLabel:", withObject: postString, waitUntilDone: false)
+                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
                 
             }
             
         }).resume()
         
         
+        
+    }
+    
+    func updatePostLabel(postString: String) {
         
     }
     
