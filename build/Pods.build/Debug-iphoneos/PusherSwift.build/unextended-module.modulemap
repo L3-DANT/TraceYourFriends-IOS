@@ -1,0 +1,10 @@
+framework module PusherSwift {
+  umbrella header "PusherSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module PusherSwift.__Swift {
+    exclude header "PusherSwift-Swift.h"
+}

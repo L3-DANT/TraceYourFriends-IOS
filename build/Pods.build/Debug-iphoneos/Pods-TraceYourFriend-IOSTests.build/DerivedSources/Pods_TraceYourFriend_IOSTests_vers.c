@@ -1,0 +1,1 @@
+ const unsigned char Pods_TraceYourFriend_IOSTestsVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Pods_TraceYourFriend_IOSTests  PROJECT:Pods-1" "\n"; const double Pods_TraceYourFriend_IOSTestsVersionNumber __attribute__ ((used)) = (double)1.;

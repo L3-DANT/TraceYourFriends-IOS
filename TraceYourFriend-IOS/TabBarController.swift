@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabBarController: UIViewController {
+class TabBarController: UITabBarController {
     
     var isUserLogIn = false
 
