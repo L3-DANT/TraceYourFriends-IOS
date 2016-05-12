@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': '/Users/Error_404/Documents/L3 DANT/NouvellesTechnoWeb/TraceYourFriend-IOS/build/Debug-iphoneos/Starscream/Starscream.framework/Modules'
+    'contents': [{
+      'type': 'file',
+      'name': 'module.modulemap',
+      'external-contents': '/Users/Error_404/Documents/L3 DANT/NouvellesTechnoWeb/TraceYourFriend-IOS/build/Pods.build/Debug-iphoneos/Starscream.build/unextended-module.modulemap',
+    }]
+  }]
+}
