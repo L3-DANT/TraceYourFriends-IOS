@@ -23,7 +23,7 @@ class DetailViewController: UIViewController {
     func configureView() {
         if let detailUser = detailUser {
             if let detailDescriptionLabel = detailDescriptionLabel {
-                detailDescriptionLabel.text = detailUser.name
+                detailDescriptionLabel.text = "X : " + detailUser.coorX + " Y : " + detailUser.coorY
                 title = detailUser.name
             }
         }
