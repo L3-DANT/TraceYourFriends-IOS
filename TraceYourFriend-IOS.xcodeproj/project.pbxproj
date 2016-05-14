@@ -12,6 +12,7 @@
 		032D3D5B1CB6599A00F1F294 /* OptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D5A1CB6599A00F1F294 /* OptionController.swift */; };
 		032D3D9D1CBE7EC700F1F294 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D9C1CBE7EC700F1F294 /* LoginViewController.swift */; };
 		032D3D9F1CBE7EE300F1F294 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032D3D9E1CBE7EE300F1F294 /* SigninViewController.swift */; };
+		03868CC11CE750E7004E0658 /* AddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03868CC01CE750E7004E0658 /* AddController.swift */; };
 		03C6B1B11CE46A93002BD207 /* Amis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C6B1B01CE46A93002BD207 /* Amis.swift */; };
 		03C6B1B31CE46B97002BD207 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C6B1B21CE46B97002BD207 /* User.swift */; };
 		03C6B1B51CE49AB1002BD207 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C6B1B41CE49AB1002BD207 /* DetailViewController.swift */; };
@@ -102,6 +103,7 @@
 		032D3D9C1CBE7EC700F1F294 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		032D3D9E1CBE7EE300F1F294 /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		033624D11CE4B46500903237 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		03868CC01CE750E7004E0658 /* AddController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddController.swift; sourceTree = "<group>"; };
 		03C6B1B01CE46A93002BD207 /* Amis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Amis.swift; sourceTree = "<group>"; };
 		03C6B1B21CE46B97002BD207 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		03C6B1B41CE49AB1002BD207 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				03C6B1B01CE46A93002BD207 /* Amis.swift */,
 				03C6B1B21CE46B97002BD207 /* User.swift */,
 				03C6B1B41CE49AB1002BD207 /* DetailViewController.swift */,
+				03868CC01CE750E7004E0658 /* AddController.swift */,
 			);
 			path = "TraceYourFriend-IOS";
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				03C6B1B51CE49AB1002BD207 /* DetailViewController.swift in Sources */,
 				032D3D9D1CBE7EC700F1F294 /* LoginViewController.swift in Sources */,
 				03C6B1B11CE46A93002BD207 /* Amis.swift in Sources */,
+				03868CC11CE750E7004E0658 /* AddController.swift in Sources */,
 				031FABF41CE32CD1001622EE /* ContactViewController.swift in Sources */,
 				032D3D5B1CB6599A00F1F294 /* OptionController.swift in Sources */,
 				032D3D9F1CBE7EE300F1F294 /* SigninViewController.swift in Sources */,

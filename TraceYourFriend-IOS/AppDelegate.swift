@@ -31,17 +31,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = UIColor.candyBlue()
         UITabBar.appearance().tintColor = UIColor.candyBlue()
         UITabBar.appearance().backgroundColor = UIColor.whiteColor()
+        
+        UINavigationBar.appearance().barTintColor = UIColor.candyBlue()
         return true
     }
     
     /*func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
-     guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-     guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-     if topAsDetailController.detailUser == nil {
-     // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-     return true
-     }
-     return false
+        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
+        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
+        if topAsDetailController.detailUser == nil {
+        // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+            return true
+        }
+        return false
      }*/
 
     
