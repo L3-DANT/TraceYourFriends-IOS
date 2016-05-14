@@ -20,6 +20,4 @@ class User {
         self.coorX = coorX
         self.coorY = coorY
     }
-    
-    
 }

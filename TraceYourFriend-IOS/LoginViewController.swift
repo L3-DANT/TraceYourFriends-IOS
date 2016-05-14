@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import PusherSwift
+import PusherSwift
 
 class LoginViewController: UIViewController {
     
@@ -29,10 +29,10 @@ class LoginViewController: UIViewController {
     
     @IBAction func LoginClicked(sender: AnyObject) {
         
-        /*let pusher = Pusher(
+        let pusher = Pusher(
             key:"37c3b876be2d4696857a",
             options: ["cluster": "eu"]
-        )*/
+        )
         
         let userEmail:String! = emailTextBox.text
         let userPassword:String! = passwordTextBox.text
@@ -96,9 +96,9 @@ class LoginViewController: UIViewController {
                     NSUserDefaults.standardUserDefaults().synchronize()
                     self.dismissViewControllerAnimated(true, completion: nil)
                     
-                    //var friends = postString.characters.split{$0 == ","}.map(String.init)
+                    var friends = postString.characters.split{$0 == ","}.map(String.init)
                     
-                    /*var channel = [PusherChannel]()
+                    var channel = [PusherChannel]()
                     for i in 0...friends.count-1 {
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -110,7 +110,7 @@ class LoginViewController: UIViewController {
                             }
                         })
                     }
-                    pusher.connect()*/
+                    pusher.connect()
                 }
                 
                 self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)

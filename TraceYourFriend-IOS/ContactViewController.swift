@@ -23,14 +23,8 @@ class ContactViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         //self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        users = [
-            User(name:"Alban", category: "Friends",coorX:"76", coorY: "76"),
-            User(name:"Aniss", category: "Friends",coorX:"76", coorY: "76"),
-            User(name:"Kaci", category: "Request",coorX:"76", coorY: "76"),
-            User(name:"Leila", category: "Request",coorX:"76", coorY: "76"),
-            User(name:"Romann", category: "Favourite",coorX:"76", coorY: "76"),
-            User(name:"Test", category: "Request",coorX:"76", coorY: "76"),
-        ]
+        users = Amis.getInstance.ami
+        
         if let splitViewController = splitViewController {
             let controllers = splitViewController.viewControllers
             detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
@@ -42,20 +36,22 @@ class ContactViewController: UITableViewController {
         
         searchController.searchBar.scopeButtonTitles = ["All", "Favourite", "Friends", "Request"]
         searchController.searchBar.delegate = self
+        
+        filterContentForSearchText("")
     }
 
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredUsers = users.filter { user in
             let categoryMatch = (scope == "All") || (user.category == scope)
-            return  categoryMatch && user.name.lowercaseString.containsString(searchText.lowercaseString)
+            return  categoryMatch && (user.name.lowercaseString.containsString(searchText.lowercaseString) || searchText == "")
         }
-        
         tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.collapsed
         super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,7 +64,7 @@ class ContactViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active{
             return filteredUsers.count
         }
         return users.count
@@ -77,7 +73,7 @@ class ContactViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         let user: User
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active{
             user = filteredUsers[indexPath.row]
         } else {
             user = users[indexPath.row]
@@ -92,7 +88,7 @@ class ContactViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let user: User
-                if searchController.active && searchController.searchBar.text != "" {
+                if searchController.active{
                     user = filteredUsers[indexPath.row]
                 } else {
                     user = users[indexPath.row]
@@ -116,5 +112,6 @@ extension ContactViewController: UISearchResultsUpdating {
 extension ContactViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+
     }
 }
