@@ -418,10 +418,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RCO-mD-tar">
-                                <rect key="frame" x="20" y="74" width="560" height="477"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="kwG-ZU-qoH">
-                                        <rect key="frame" x="180" y="0.0" width="200" height="477"/>
+                                        <rect key="frame" x="200" y="0.0" width="200" height="536"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="Qmu-mA-zc8"/>
@@ -430,6 +430,11 @@
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="aYi-zV-XaZ"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                 </subviews>
                             </stackView>
@@ -437,10 +442,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aup-49-Ign" firstAttribute="top" secondItem="RCO-mD-tar" secondAttribute="bottom" id="3yQ-rw-WPS"/>
+                            <constraint firstAttribute="bottom" secondItem="RCO-mD-tar" secondAttribute="bottom" id="Ggi-t3-eGK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RCO-mD-tar" secondAttribute="trailing" id="LDR-5j-bL4"/>
+                            <constraint firstAttribute="trailing" secondItem="RCO-mD-tar" secondAttribute="trailing" id="O93-Lu-kAx"/>
+                            <constraint firstItem="RCO-mD-tar" firstAttribute="top" secondItem="98z-aQ-cBg" secondAttribute="bottom" id="UlK-iN-X7Q"/>
                             <constraint firstItem="RCO-mD-tar" firstAttribute="top" secondItem="98z-aQ-cBg" secondAttribute="bottom" constant="10" id="aWP-FX-Egg"/>
+                            <constraint firstItem="RCO-mD-tar" firstAttribute="leading" secondItem="zWL-ln-Jmd" secondAttribute="leading" id="gLt-VJ-szz"/>
                             <constraint firstAttribute="leadingMargin" secondItem="RCO-mD-tar" secondAttribute="leading" id="jeb-x6-zPS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="aWP-FX-Egg"/>
+                                <exclude reference="3yQ-rw-WPS"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="tBo-xO-yBH"/>

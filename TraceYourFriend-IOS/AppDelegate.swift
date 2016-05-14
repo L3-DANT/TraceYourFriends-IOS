@@ -19,12 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         core.requestWhenInUseAuthorization()
         //Could not cast value of type 'TraceYourFriend_IOS.TabBarController' (0x10544b120) to'UISplitViewController' (0x1077ab240).
         //
-        let splitViewController = window!.rootViewController as! UISplitViewController
+        /*let splitViewController = window!.rootViewController as! UISplitViewController
         
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
-        
+        */
         
         UISearchBar.appearance().barTintColor = UIColor.whiteColor()
         UISearchBar.appearance().tintColor = UIColor.candyGreen()
