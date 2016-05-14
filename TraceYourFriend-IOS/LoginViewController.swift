@@ -44,7 +44,6 @@ class LoginViewController: UIViewController {
         
         //Envoi les données de log in
         
-        
         let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/connexion"
         
         let url = NSURL(string: postEndpoint)!
@@ -93,6 +92,7 @@ class LoginViewController: UIViewController {
                 if(postString != "null"){
                     //Then LogIn is successfully done
                     NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLogIn")
+                    NSUserDefaults.standardUserDefaults().setValue(userEmail, forKey: "myName")
                     NSUserDefaults.standardUserDefaults().synchronize()
                     self.dismissViewControllerAnimated(true, completion: nil)
                     
