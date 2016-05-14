@@ -31,7 +31,8 @@ class TraceController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
-    @IBAction func centerUserLocation(sender: AnyObject) {
+
+    @IBAction func findMe(sender: AnyObject) {
         mapKit.setUserTrackingMode(.Follow, animated: true)
     }
     

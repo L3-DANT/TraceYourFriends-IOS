@@ -27,14 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         */
         
         UISearchBar.appearance().barTintColor = UIColor.whiteColor()
-        UISearchBar.appearance().tintColor = UIColor.candyGreen()
-        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = UIColor.candyGreen()
-        UITabBar.appearance().tintColor = UIColor.candyGreen()
+        UISearchBar.appearance().tintColor = UIColor.candyBlue()
+        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = UIColor.candyBlue()
+        UITabBar.appearance().tintColor = UIColor.candyBlue()
         UITabBar.appearance().backgroundColor = UIColor.whiteColor()
         return true
     }
     
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
+    /*func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
      guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
      guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
      if topAsDetailController.detailUser == nil {
@@ -42,14 +42,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
      return true
      }
      return false
-     }
+     }*/
 
     
 }
 
 extension UIColor {
-    static func candyGreen() -> UIColor {
-        return UIColor(red: 67.0/255.0, green: 205.0/255.0, blue: 135.0/255.0, alpha: 1.0)
+    static func candyBlue() -> UIColor {
+        return UIColor(red: 0.0/255.0, green: 128.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     }
 }
 
