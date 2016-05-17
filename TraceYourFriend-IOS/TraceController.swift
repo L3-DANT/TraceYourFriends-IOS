@@ -28,7 +28,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate {
         }
         
         for ami in Amis.getInstance.ami {
-            let friendLocation = CLLocationCoordinate2DMake(ami.coorX as Double, ami.coorY as Double)
+            let friendLocation = CLLocationCoordinate2DMake(ami.coorX, ami.coorY)
             // Drop a pin
             let dropPin = MKPointAnnotation()
             dropPin.coordinate = friendLocation
