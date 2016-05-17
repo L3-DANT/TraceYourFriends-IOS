@@ -10,12 +10,11 @@ import UIKit
 
 class Amis {
     var ami = [
-        User(name:"Alban", category: "Friends",coorX:"76", coorY: "76"),
-        User(name:"Aniss", category: "Friends",coorX:"76", coorY: "76"),
-        User(name:"Kaci", category: "Request",coorX:"76", coorY: "76"),
-        User(name:"Leila", category: "Request",coorX:"76", coorY: "76"),
-        User(name:"Romann", category: "Favourite",coorX:"76", coorY: "76"),
-        User(name:"Test", category: "Request",coorX:"76", coorY: "76"),
+        User(name:"Alban", category: "Friends",coorX:48.843293, coorY: 2.283060),
+        User(name:"Aniss", category: "Friends",coorX: 48.996148, coorY: 1.686047),
+        User(name:"Kaci", category: "Request",coorX: 48.928212, coorY: 2.386411),
+        User(name:"Leila", category: "Request",coorX: 48.910410, coorY: 2.280922),
+        User(name:"Romann", category: "Favourite",coorX:48.995689, coorY: 1.900270),
         ]
     static let getInstance = Amis()
     
