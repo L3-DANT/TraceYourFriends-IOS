@@ -26,6 +26,18 @@ class TraceController: UIViewController, CLLocationManagerDelegate {
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
         }
+        
+        for ami in Amis.getInstance.ami {
+            let friendLocation = CLLocationCoordinate2DMake(ami.coorX, ami.coorY)
+            // Drop a pin
+            let dropPin = MKPointAnnotation()
+            dropPin.coordinate = friendLocation
+            dropPin.title = ami.name
+            dropPin.subtitle = ami.category
+            mapKit.addAnnotation(dropPin)
+
+        }
+        
         dispatch_async(dispatch_get_main_queue(), {
             NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(TraceController.updateCoor), userInfo: nil, repeats: true)
         })
@@ -49,7 +61,6 @@ class TraceController: UIViewController, CLLocationManagerDelegate {
     
     
     func sendJson(name: String, coorX: Double, coorY: Double){
-        //Envoi les données de log in
         
         let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/coord"
         

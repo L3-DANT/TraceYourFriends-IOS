@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
                         channel.append(pusher.subscribe(friends[i]))
                         channel[i].bind("coor", callback: { (data: AnyObject?) -> Void in
                             if let data = data as? String {
-                                Amis.getInstance.ami[i] = User(name: data, category: "",coorX: "",coorY: "")
+                                Amis.getInstance.ami[i] = User(name: data, category: "",coorX: 0.0,coorY: 0.0)
                             }
                         })
                     }

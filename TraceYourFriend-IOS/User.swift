@@ -11,10 +11,10 @@ import Foundation
 class User {
     var name : String
     var category : String
-    var coorX : String
-    var coorY : String
+    var coorX : Double
+    var coorY : Double
     
-    init(name: String, category: String, coorX: String, coorY : String){
+    init(name: String, category: String, coorX: Double, coorY : Double){
         self.name = name
         self.category = category
         self.coorX = coorX
