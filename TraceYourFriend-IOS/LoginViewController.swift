@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PusherSwift
+//import PusherSwift
 
 class LoginViewController: UIViewController {
     
@@ -29,10 +29,10 @@ class LoginViewController: UIViewController {
     
     @IBAction func LoginClicked(sender: AnyObject) {
         
-        let pusher = Pusher(
+        /*let pusher = Pusher(
             key:"37c3b876be2d4696857a",
             options: ["cluster": "eu"]
-        )
+        )*/
         
         let userEmail:String! = emailTextBox.text
         let userPassword:String! = passwordTextBox.text
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
             
         } catch {
             
-            print("ERROR1")
+            print("ERROR: LoginViewController")
             
         }
         
@@ -79,7 +79,7 @@ class LoginViewController: UIViewController {
                 
                 realResponse.statusCode == 200 else {
                     
-                    print("ERROR")
+                    print("ERROR2 : LoginViewController")
                     
                     return
                     
@@ -89,7 +89,13 @@ class LoginViewController: UIViewController {
                 
                 print("le POST: " + postString)
                 
-                if(postString != "null"){
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLogIn")
+                NSUserDefaults.standardUserDefaults().setValue(userEmail, forKey: "myName")
+                NSUserDefaults.standardUserDefaults().synchronize()
+                self.dismissViewControllerAnimated(true, completion: nil)
+
+                
+                /*if(postString != "null"){
                     //Then LogIn is successfully done
                     NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLogIn")
                     NSUserDefaults.standardUserDefaults().setValue(userEmail, forKey: "myName")
@@ -111,7 +117,7 @@ class LoginViewController: UIViewController {
                         })
                     }
                     pusher.connect()
-                }
+                }*/
                 
                 self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
                 

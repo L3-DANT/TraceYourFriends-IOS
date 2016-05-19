@@ -9,6 +9,7 @@
 
 
 import UIKit
+import MapKit
 
 class DetailViewController: UIViewController {
     
@@ -17,6 +18,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var acceptButton: UIButton!
     
     @IBOutlet weak var declineButton: UIButton!
+    
+    var mapDetail = MKMapView()
+    
     var detailUser: User? {
         didSet {
             configureView()
@@ -26,42 +30,61 @@ class DetailViewController: UIViewController {
     func configureView() {
         if let detailUser = detailUser {
             if let detailDescriptionLabel = detailDescriptionLabel {
-                if detailUser.category == "Friends" || detailUser.category == "Favorite" {
+                if detailUser.category == "Friends" {
                     detailDescriptionLabel.text = "Profile of : " + detailUser.name
                     title = detailUser.name
-                    acceptButton.hidden = true
-                    declineButton.hidden = true
-                }else{
+                    acceptButton.setTitle("Trace " + detailUser.name, forState: .Normal)
+                    declineButton.setTitle("Remove " + detailUser.name, forState: .Normal)
+                }else if detailUser.category == "Request"{
                     detailDescriptionLabel.text = "Would you like to accept : " + detailUser.name + " ?"
                     title = detailUser.name
-                    acceptButton.hidden = false
-                    declineButton.hidden = false
+                }else{
+                    detailDescriptionLabel.text = "Profile of your favorite friend : " + detailUser.name
+                    title = detailUser.name
+                    acceptButton.setTitle("Trace " + detailUser.name, forState: .Normal)
+                    declineButton.setTitle("Remove " + detailUser.name, forState: .Normal)
                 }
             }
         }
     }
     
+    
+    //Accept request or trace if the user is already a friend or favorite
+    
     @IBAction func acceptRequest(sender: AnyObject) {
         let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
-        acceptButton.hidden = true
-        declineButton.hidden = true
-        detailDescriptionLabel.hidden = true
-        sendJson((detailUser!.name), bool: true)
-        user!.category = "Friends"
-        message("You just added as friend " + user!.name)
-        viewDidLoad()
+
+        if user?.category == "Request" {
+            sendJson((detailUser!.name), bool: true)
+            user!.category = "Friends"
+            message("You just added as friend " + user!.name)
+            viewDidLoad()
+        }else{
+            let initialLocation = CLLocation(latitude: user!.coorX, longitude: user!.coorY)
+            centerMapOnLocation(initialLocation)
+        }
+        
     }
+    
+    
+    //Decline request or delete the user if he's already a friend or favorite
     
     @IBAction func declineRequest(sender: AnyObject) {
         let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
-        acceptButton.hidden = true
-        declineButton.hidden = true
-        detailDescriptionLabel.hidden = true
-        sendJson((detailUser!.name), bool: false)
-        user!.category = "Friends"
-        message("You just decline " + user!.name)
-        viewDidLoad()
-
+        if user?.category == "Request" {
+            sendJson((detailUser!.name), bool: false)
+            user!.category = "Friends"
+            message("You just decline " + user!.name)
+            viewDidLoad()
+        }else{
+            var i : Int = 0
+            for ami in Amis.getInstance.ami {
+                if ami.name == detailUser?.name {
+                    Amis.getInstance.ami.removeAtIndex(i)
+                }
+                i += 1
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -140,6 +163,11 @@ class DetailViewController: UIViewController {
         
         self.presentViewController(myAlert, animated: true, completion: nil)
         
+    }
+    let regionRadius: CLLocationDistance = 1000
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
+        self.mapDetail.setRegion(coordinateRegion, animated: true)
     }
 }
 
