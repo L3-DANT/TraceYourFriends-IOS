@@ -34,7 +34,7 @@ class ContactViewController: UITableViewController {
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
-        searchController.searchBar.scopeButtonTitles = ["All", "Favourite", "Friends", "Request"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Favorite", "Friends", "Request"]
         searchController.searchBar.delegate = self
         
         filterContentForSearchText("")

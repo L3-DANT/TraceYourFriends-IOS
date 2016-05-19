@@ -525,25 +525,27 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4Vm-xK-Px5">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="8eh-MN-atX" detailTextLabel="hiJ-xW-y56" style="IBUITableViewCellStyleSubtitle" id="4Vm-xK-Px5">
                                 <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Vm-xK-Px5" id="0Cg-k4-qd8">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQ3-Nu-ghR">
-                                            <rect key="frame" x="13" y="2.5" width="31.5" height="19.5"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8eh-MN-atX">
+                                            <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJH-f8-af5">
-                                            <rect key="frame" x="123" y="0.0" width="37" height="30"/>
-                                            <state key="normal" title="Invite"/>
-                                            <connections>
-                                                <action selector="inviteContact:" destination="XYL-yh-cWe" eventType="touchUpInside" id="zY6-9S-UTO"/>
-                                            </connections>
-                                        </button>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hiJ-xW-y56">
+                                            <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -553,7 +555,20 @@
                             <outlet property="delegate" destination="XYL-yh-cWe" id="Rn3-oL-aGt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="lVB-5W-6uZ"/>
+                    <navigationItem key="navigationItem" title="Add Friends" id="lVB-5W-6uZ">
+                        <barButtonItem key="rightBarButtonItem" id="zlw-o4-MEO">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JJH-f8-af5">
+                                <rect key="frame" x="543" y="7" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Invite">
+                                    <color key="titleColor" red="0.99255631010000001" green="0.96969605839999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="inviteContact:" destination="XYL-yh-cWe" eventType="touchUpInside" id="zY6-9S-UTO"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="ZDg-qV-oJf" id="8dj-Bi-j2o"/>
                     </connections>
@@ -693,7 +708,20 @@
                     <view key="view" contentMode="scaleToFill" id="VpY-8k-GPn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing Selected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kj2-gC-fcn">
+                                <rect key="frame" x="10" y="289" width="580" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Kj2-gC-fcn" secondAttribute="trailing" constant="10" id="0Ts-nf-HEQ"/>
+                            <constraint firstItem="Kj2-gC-fcn" firstAttribute="centerY" secondItem="VpY-8k-GPn" secondAttribute="centerY" id="4b1-Px-RcJ"/>
+                            <constraint firstItem="Kj2-gC-fcn" firstAttribute="leading" secondItem="VpY-8k-GPn" secondAttribute="leading" constant="10" id="qBv-nQ-w3K"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a4g-og-ujy"/>
                 </viewController>

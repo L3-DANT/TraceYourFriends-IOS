@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
     func configureView() {
         if let detailUser = detailUser {
             if let detailDescriptionLabel = detailDescriptionLabel {
-                if detailUser.category == "Friends" || detailUser.category == "Favourite" {
+                if detailUser.category == "Friends" || detailUser.category == "Favorite" {
                     detailDescriptionLabel.text = "Profile of : " + detailUser.name
                     title = detailUser.name
                     acceptButton.hidden = true
