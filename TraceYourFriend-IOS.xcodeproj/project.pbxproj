@@ -178,6 +178,65 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		03BA93611CEDB067004DDE43 /* AuthentificationGroup */ = {
+			isa = PBXGroup;
+			children = (
+				032D3D9C1CBE7EC700F1F294 /* LoginViewController.swift */,
+				032D3D9E1CBE7EE300F1F294 /* SigninViewController.swift */,
+			);
+			name = AuthentificationGroup;
+			sourceTree = "<group>";
+		};
+		03BA93621CEDB0C5004DDE43 /* TabBarGroup */ = {
+			isa = PBXGroup;
+			children = (
+				03BA93631CEDB0F1004DDE43 /* SplitGroup */,
+				03EF0A951CB54270005F5133 /* TraceController.swift */,
+				032D3D561CB6595200F1F294 /* TabBarController.swift */,
+				032D3D5A1CB6599A00F1F294 /* OptionController.swift */,
+			);
+			name = TabBarGroup;
+			sourceTree = "<group>";
+		};
+		03BA93631CEDB0F1004DDE43 /* SplitGroup */ = {
+			isa = PBXGroup;
+			children = (
+				031FABF31CE32CD1001622EE /* ContactViewController.swift */,
+				03C6B1B41CE49AB1002BD207 /* DetailViewController.swift */,
+				03868CC01CE750E7004E0658 /* AddController.swift */,
+				03BA93581CED9AB2004DDE43 /* NoSelectionViewController.swift */,
+			);
+			name = SplitGroup;
+			sourceTree = "<group>";
+		};
+		03BA93641CEDB154004DDE43 /* FriendsGroup */ = {
+			isa = PBXGroup;
+			children = (
+				03C6B1B01CE46A93002BD207 /* Amis.swift */,
+				03C6B1B21CE46B97002BD207 /* User.swift */,
+			);
+			name = FriendsGroup;
+			sourceTree = "<group>";
+		};
+		03BA93651CEDB168004DDE43 /* UtilGroup */ = {
+			isa = PBXGroup;
+			children = (
+				03E3DEFC1CE33230006337F6 /* ButtonView.swift */,
+				03EF0A651CB5342D005F5133 /* AppDelegate.swift */,
+				03EF0A711CB5342D005F5133 /* Info.plist */,
+			);
+			name = UtilGroup;
+			sourceTree = "<group>";
+		};
+		03BA93661CEDB17D004DDE43 /* StoryBoardGroup */ = {
+			isa = PBXGroup;
+			children = (
+				03EF0A691CB5342D005F5133 /* Main.storyboard */,
+				03EF0A6E1CB5342D005F5133 /* LaunchScreen.storyboard */,
+			);
+			name = StoryBoardGroup;
+			sourceTree = "<group>";
+		};
 		03EF0A591CB5342D005F5133 = {
 			isa = PBXGroup;
 			children = (
@@ -205,23 +264,12 @@
 		03EF0A641CB5342D005F5133 /* TraceYourFriend-IOS */ = {
 			isa = PBXGroup;
 			children = (
-				03EF0A651CB5342D005F5133 /* AppDelegate.swift */,
-				03EF0A691CB5342D005F5133 /* Main.storyboard */,
-				03EF0A6E1CB5342D005F5133 /* LaunchScreen.storyboard */,
+				03BA93661CEDB17D004DDE43 /* StoryBoardGroup */,
 				03EF0A9D1CB55CB5005F5133 /* Assets.xcassets */,
-				03EF0A951CB54270005F5133 /* TraceController.swift */,
-				032D3D561CB6595200F1F294 /* TabBarController.swift */,
-				03EF0A711CB5342D005F5133 /* Info.plist */,
-				032D3D5A1CB6599A00F1F294 /* OptionController.swift */,
-				032D3D9C1CBE7EC700F1F294 /* LoginViewController.swift */,
-				032D3D9E1CBE7EE300F1F294 /* SigninViewController.swift */,
-				031FABF31CE32CD1001622EE /* ContactViewController.swift */,
-				03E3DEFC1CE33230006337F6 /* ButtonView.swift */,
-				03C6B1B01CE46A93002BD207 /* Amis.swift */,
-				03C6B1B21CE46B97002BD207 /* User.swift */,
-				03C6B1B41CE49AB1002BD207 /* DetailViewController.swift */,
-				03868CC01CE750E7004E0658 /* AddController.swift */,
-				03BA93581CED9AB2004DDE43 /* NoSelectionViewController.swift */,
+				03BA93621CEDB0C5004DDE43 /* TabBarGroup */,
+				03BA93611CEDB067004DDE43 /* AuthentificationGroup */,
+				03BA93651CEDB168004DDE43 /* UtilGroup */,
+				03BA93641CEDB154004DDE43 /* FriendsGroup */,
 			);
 			path = "TraceYourFriend-IOS";
 			sourceTree = "<group>";
