@@ -12,9 +12,11 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     
+    @IBOutlet weak var acceptButton: UIButton!
+    
+    @IBOutlet weak var declineButton: UIButton!
     var detailUser: User? {
         didSet {
             configureView()
@@ -24,28 +26,42 @@ class DetailViewController: UIViewController {
     func configureView() {
         if let detailUser = detailUser {
             if let detailDescriptionLabel = detailDescriptionLabel {
-                detailDescriptionLabel.text = "Voulez vous accepter " + detailUser.name + "?"
-                title = detailUser.name
-                
+                if detailUser.category == "Friends" || detailUser.category == "Favourite" {
+                    detailDescriptionLabel.text = "Profile of : " + detailUser.name
+                    title = detailUser.name
+                    acceptButton.hidden = true
+                    declineButton.hidden = true
+                }else{
+                    detailDescriptionLabel.text = "Would you like to accept : " + detailUser.name + " ?"
+                    title = detailUser.name
+                    acceptButton.hidden = false
+                    declineButton.hidden = false
+                }
             }
         }
     }
     
     @IBAction func acceptRequest(sender: AnyObject) {
-        sendJson((detailUser!.name), bool: true)
         let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
-        print((user?.name)! as String)
+        acceptButton.hidden = true
+        declineButton.hidden = true
+        detailDescriptionLabel.hidden = true
+        sendJson((detailUser!.name), bool: true)
         user!.category = "Friends"
+        message("You just added as friend " + user!.name)
         viewDidLoad()
-        
     }
     
     @IBAction func declineRequest(sender: AnyObject) {
+        let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
+        acceptButton.hidden = true
+        declineButton.hidden = true
+        detailDescriptionLabel.hidden = true
         sendJson((detailUser!.name), bool: false)
-        
-        let contactViewController:ContactViewController = ContactViewController()
-        
-        self.presentViewController(contactViewController, animated: true, completion: nil)
+        user!.category = "Friends"
+        message("You just decline " + user!.name)
+        viewDidLoad()
+
     }
     
     override func viewDidLoad() {
@@ -114,5 +130,16 @@ class DetailViewController: UIViewController {
         }).resume()
     }
     
+    func message(userMessage:String){
+        
+        let myAlert = UIAlertController(title: "Alert", message:userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
+        
+        myAlert.addAction(okAction)
+        
+        self.presentViewController(myAlert, animated: true, completion: nil)
+        
+    }
 }
 

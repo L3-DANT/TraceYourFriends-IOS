@@ -85,7 +85,10 @@ class ContactViewController: UITableViewController {
     
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
+        if (segue.identifier == "toDetailView"){
+            let detailNC: UINavigationController = (segue.destinationViewController as? UINavigationController)!
+            let detailVC: DetailViewController? = detailNC.topViewController as! DetailViewController?
+            
             if let indexPath = tableView.indexPathForSelectedRow {
                 let user: User
                 if searchController.active{
@@ -93,10 +96,9 @@ class ContactViewController: UITableViewController {
                 } else {
                     user = users[indexPath.row]
                 }
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                controller.detailUser = user
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
-                controller.navigationItem.leftItemsSupplementBackButton = true
+                detailVC!.detailUser = user
+                detailVC!.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+                detailVC!.navigationItem.leftItemsSupplementBackButton = true
             }
         }
     }
