@@ -14,7 +14,7 @@ class Amis {
         User(name:"Aniss", category: "Friends",coorX: 48.996148, coorY: 1.686047),
         User(name:"Kaci", category: "Request",coorX: 48.928212, coorY: 2.386411),
         User(name:"Leila", category: "Request",coorX: 48.910410, coorY: 2.280922),
-        User(name:"Romann", category: "Favourite",coorX:48.995689, coorY: 1.900270),
+        User(name:"Romann", category: "Favorite",coorX:48.995689, coorY: 1.900270),
         ]
     static let getInstance = Amis()
     

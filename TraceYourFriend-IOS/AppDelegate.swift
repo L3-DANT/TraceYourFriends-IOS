@@ -17,14 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         core.requestWhenInUseAuthorization()
-        //Could not cast value of type 'TraceYourFriend_IOS.TabBarController' (0x10544b120) to'UISplitViewController' (0x1077ab240).
-        //
-        /*let splitViewController = window!.rootViewController as! UISplitViewController
+        let splitVC: UISplitViewController? = self.window?.rootViewController as? UISplitViewController
         
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-        splitViewController.delegate = self
-        */
+        if splitVC != nil {
+            splitVC?.delegate = self
+        }
         
         UISearchBar.appearance().barTintColor = UIColor.whiteColor()
         UISearchBar.appearance().tintColor = UIColor.candyBlue()
@@ -36,17 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return true
     }
     
-    /*func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
-        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-        if topAsDetailController.detailUser == nil {
-        // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-            return true
+    //UISPlitViewControllerDelegate
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
+        let detailNC: UINavigationController? = secondaryViewController as? UINavigationController
+        if detailNC != nil{
+            let noSelectionVC: NoSelectionViewController? = detailNC?.topViewController as? NoSelectionViewController
+            if noSelectionVC  != nil{
+                return true
+            }
         }
         return false
-     }*/
-
-    
+    }
 }
 
 extension UIColor {
