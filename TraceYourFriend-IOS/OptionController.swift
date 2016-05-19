@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MapKit
 
 
 
@@ -16,14 +16,11 @@ enum TravelModes: Int {
     case walking
     case bicycling
 }
-protocol OptionControllerDelegate: NSObjectProtocol {
-    func changeMapDisplayMode(controller: OptionController)
-}
 class OptionController: UIViewController {
 
     var travelMode = TravelModes.driving
     
-    weak var delegate: OptionControllerDelegate?
+    var mapOption = MKMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +74,32 @@ class OptionController: UIViewController {
 
     }
     @IBAction func changeMapType(sender: AnyObject) {
-        delegate?.changeMapDisplayMode(self)
-
+        let actionSheet = UIAlertController(title: "Map Types", message: "Select map type:", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let normalMapTypeAction = UIAlertAction(title: "Normal", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            //self.viewMap.mapType = kGMSTypeNormal
+            self.mapOption.mapType = .Standard
+        }
+        
+        let satelliteMapTypeAction = UIAlertAction(title: "Satellite", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            //self.viewMap.mapType = kGMSTypeTerrain
+            self.mapOption.mapType = .Satellite
+        }
+        
+        let hybridMapTypeAction = UIAlertAction(title: "Hybrid", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            self.mapOption.mapType = .Hybrid
+        }
+        
+        let cancelAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
+            
+        }
+        
+        actionSheet.addAction(normalMapTypeAction)
+        actionSheet.addAction(satelliteMapTypeAction)
+        actionSheet.addAction(hybridMapTypeAction)
+        actionSheet.addAction(cancelAction)
+        
+        presentViewController(actionSheet, animated: true, completion: nil)
+        
     }
 }

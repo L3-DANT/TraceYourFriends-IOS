@@ -51,6 +51,7 @@
                     <tabBarItem key="tabBarItem" title="Maps" image="compass" id="gaP-fI-flc"/>
                     <connections>
                         <outlet property="mapKit" destination="ex6-Rn-okV" id="wFa-Vk-bqF"/>
+                        <segue destination="tnT-2b-hT0" kind="showDetail" id="5FX-q2-vxh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVh-wn-iJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -755,5 +756,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="KBA-Lj-vEm"/>
+        <segue reference="5FX-q2-vxh"/>
     </inferredMetricsTieBreakers>
 </document>

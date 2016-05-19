@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, OptionControllerDelegate {
+class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapKit: MKMapView!
     var locationManager: CLLocationManager!
@@ -19,9 +19,6 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         super.viewDidLoad()
         mapKit.setUserTrackingMode(.Follow, animated: true)
         mapKit.delegate = self
-        
-        let optionController = OptionController()
-        optionController.delegate = self
         
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
@@ -50,37 +47,6 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             
         }
         
-    }
-    
-    func changeMapDisplayMode(controller: OptionController) {
-        print("bonjour")
-        
-        let actionSheet = UIAlertController(title: "Map Types", message: "Select map type:", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        let normalMapTypeAction = UIAlertAction(title: "Normal", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            //self.viewMap.mapType = kGMSTypeNormal
-            self.mapKit.mapType = .Standard
-        }
-        
-        let satelliteMapTypeAction = UIAlertAction(title: "Satellite", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            //self.viewMap.mapType = kGMSTypeTerrain
-            self.mapKit.mapType = .Satellite
-        }
-        
-        let hybridMapTypeAction = UIAlertAction(title: "Hybrid", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            self.mapKit.mapType = .Hybrid
-        }
-        
-        let cancelAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
-            
-        }
-        
-        actionSheet.addAction(normalMapTypeAction)
-        actionSheet.addAction(satelliteMapTypeAction)
-        actionSheet.addAction(hybridMapTypeAction)
-        actionSheet.addAction(cancelAction)
-        
-        presentViewController(actionSheet, animated: true, completion: nil)
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -153,7 +119,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             
         } catch {
             
-            print("ERROR1")
+            print("ERROR : TraceController")
             
         }
         
@@ -164,7 +130,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
                 
                 realResponse.statusCode == 200 else {
                     
-                    print("ERROR")
+                    //print("ERROR2 : TraceController")
                     
                     return
                     
@@ -178,6 +144,15 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             }
             
         }).resume()
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let DestViewController : DetailViewController = segue.destinationViewController as! DetailViewController
+        DestViewController.mapDetail = mapKit
+        
+        let DestViewController2 : OptionController = segue.destinationViewController as! OptionController
+        DestViewController2.mapOption = mapKit
         
     }
     
