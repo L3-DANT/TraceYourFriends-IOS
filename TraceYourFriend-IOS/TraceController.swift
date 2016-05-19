@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class TraceController: UIViewController, CLLocationManagerDelegate {
+class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapKit: MKMapView!
     var locationManager: CLLocationManager!
@@ -18,6 +18,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapKit.setUserTrackingMode(.Follow, animated: true)
+        mapKit.delegate = self
         
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
@@ -26,7 +27,15 @@ class TraceController: UIViewController, CLLocationManagerDelegate {
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
         }
+        showFriends()
+
         
+        dispatch_async(dispatch_get_main_queue(), {
+            NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(TraceController.updateCoor), userInfo: nil, repeats: true)
+        })
+    }
+    
+    func showFriends(){
         for ami in Amis.getInstance.ami {
             let friendLocation = CLLocationCoordinate2DMake(ami.coorX, ami.coorY)
             // Drop a pin
@@ -34,15 +43,40 @@ class TraceController: UIViewController, CLLocationManagerDelegate {
             dropPin.coordinate = friendLocation
             dropPin.title = ami.name
             dropPin.subtitle = ami.category
+            mapView(mapKit, viewForAnnotation: dropPin)!.annotation = dropPin
             mapKit.addAnnotation(dropPin)
-
+            
         }
         
-        dispatch_async(dispatch_get_main_queue(), {
-            NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(TraceController.updateCoor), userInfo: nil, repeats: true)
-        })
     }
     
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let identifier = "MyPin"
+        
+        if annotation.isKindOfClass(MKUserLocation) {
+            return nil
+        }
+        
+        let detailButton: UIButton = UIButton(type: UIButtonType.DetailDisclosure)
+        
+        // Reuse the annotation if possible
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+        
+        if annotationView == nil
+        {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            annotationView!.canShowCallout = true
+            annotationView!.image = UIImage(named: "friendMap")
+            annotationView!.rightCalloutAccessoryView = detailButton
+        }
+        else
+        {
+            annotationView!.annotation = annotation
+        }
+        
+        return annotationView
+    }
 
     @IBAction func findMe(sender: AnyObject) {
         mapKit.setUserTrackingMode(.Follow, animated: true)
