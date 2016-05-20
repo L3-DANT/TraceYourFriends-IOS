@@ -50,7 +50,7 @@ class DetailViewController: UIViewController {
     
     
     //Accept request or trace if the user is already a friend or favorite
-    
+    //TODO
     @IBAction func acceptRequest(sender: AnyObject) {
         let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
 
@@ -60,7 +60,8 @@ class DetailViewController: UIViewController {
             message("You just added as friend " + user!.name)
             viewDidLoad()
         }else{
-            let initialLocation = CLLocation(latitude: user!.coorX, longitude: user!.coorY)
+            //TOODO
+            let initialLocation = CLLocationCoordinate2D(latitude: user!.coorX, longitude: user!.coorY)
             centerMapOnLocation(initialLocation)
         }
         
@@ -68,7 +69,7 @@ class DetailViewController: UIViewController {
     
     
     //Decline request or delete the user if he's already a friend or favorite
-    
+    //TODO
     @IBAction func declineRequest(sender: AnyObject) {
         let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
         if user?.category == "Request" {
@@ -165,8 +166,8 @@ class DetailViewController: UIViewController {
         
     }
     let regionRadius: CLLocationDistance = 1000
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
+    func centerMapOnLocation(location: CLLocationCoordinate2D) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius, regionRadius)
         self.mapDetail.setRegion(coordinateRegion, animated: true)
     }
 }

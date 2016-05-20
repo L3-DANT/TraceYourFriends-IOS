@@ -9,16 +9,18 @@
 import UIKit
 import MapKit
 
-class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, OptionControllerDelegate {
     
     @IBOutlet weak var mapKit: MKMapView!
     var locationManager: CLLocationManager!
     var location: CLLocation!
+    var optionController = OptionController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapKit.setUserTrackingMode(.Follow, animated: true)
         mapKit.delegate = self
+        optionController.delegate = self
         
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
@@ -32,6 +34,37 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         dispatch_async(dispatch_get_main_queue(), {
             NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(TraceController.updateCoor), userInfo: nil, repeats: true)
         })
+    }
+    
+    func changeMapDisplayMode() {
+        print("toto")
+        let actionSheet = UIAlertController(title: "Map Types", message: "Select map type:", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let normalMapTypeAction = UIAlertAction(title: "Normal", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            //self.viewMap.mapType = kGMSTypeNormal
+            self.mapKit.mapType = .Standard
+        }
+        
+        let satelliteMapTypeAction = UIAlertAction(title: "Satellite", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            //self.viewMap.mapType = kGMSTypeTerrain
+            self.mapKit.mapType = .Satellite
+        }
+        
+        let hybridMapTypeAction = UIAlertAction(title: "Hybrid", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            self.mapKit.mapType = .Hybrid
+        }
+        
+        let cancelAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
+            
+        }
+        
+        actionSheet.addAction(normalMapTypeAction)
+        actionSheet.addAction(satelliteMapTypeAction)
+        actionSheet.addAction(hybridMapTypeAction)
+        actionSheet.addAction(cancelAction)
+        
+        presentViewController(actionSheet, animated: true, completion: nil)
+        
     }
     
     func showFriends(){

@@ -10,6 +10,9 @@ import UIKit
 import MapKit
 
 
+protocol OptionControllerDelegate : class {
+    func changeMapDisplayMode()
+}
 
 enum TravelModes: Int {
     case driving
@@ -21,6 +24,8 @@ class OptionController: UIViewController {
     var travelMode = TravelModes.driving
     
     var mapOption = MKMapView()
+    
+    weak var delegate : OptionControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +46,9 @@ class OptionController: UIViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
         self.presentViewController(vc, animated: true, completion: nil)
     }
-    
 
+    
+    //TODO
     @IBAction func changeTravelMode(sender: AnyObject) {
         let actionSheet = UIAlertController(title: "Travel Mode", message: "Select travel mode:", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
@@ -73,33 +79,9 @@ class OptionController: UIViewController {
         presentViewController(actionSheet, animated: true, completion: nil)
 
     }
+    //TODO
     @IBAction func changeMapType(sender: AnyObject) {
-        let actionSheet = UIAlertController(title: "Map Types", message: "Select map type:", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        let normalMapTypeAction = UIAlertAction(title: "Normal", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            //self.viewMap.mapType = kGMSTypeNormal
-            self.mapOption.mapType = .Standard
-        }
-        
-        let satelliteMapTypeAction = UIAlertAction(title: "Satellite", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            //self.viewMap.mapType = kGMSTypeTerrain
-            self.mapOption.mapType = .Satellite
-        }
-        
-        let hybridMapTypeAction = UIAlertAction(title: "Hybrid", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            self.mapOption.mapType = .Hybrid
-        }
-        
-        let cancelAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
-            
-        }
-        
-        actionSheet.addAction(normalMapTypeAction)
-        actionSheet.addAction(satelliteMapTypeAction)
-        actionSheet.addAction(hybridMapTypeAction)
-        actionSheet.addAction(cancelAction)
-        
-        presentViewController(actionSheet, animated: true, completion: nil)
+        delegate!.changeMapDisplayMode()
         
     }
 }
