@@ -24,7 +24,6 @@ class ContactViewController: UITableViewController {
         //self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         users = Amis.getInstance.ami
-        
         if let splitViewController = splitViewController {
             let controllers = splitViewController.viewControllers
             detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
@@ -51,6 +50,15 @@ class ContactViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.collapsed
         super.viewWillAppear(animated)
+        
+        var i : Int = 0
+        for ami in users {
+            if ami.category == "NotFriends" {
+                users.removeAtIndex(i)
+            }
+            i+=1
+        }
+        
         tableView.reloadData()
     }
     

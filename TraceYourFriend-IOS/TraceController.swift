@@ -22,6 +22,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         mapKit.delegate = self
         optionController.delegate = self
         
+        
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
             locationManager.delegate = self
@@ -29,6 +30,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
         }
+        
         showFriends()
         
         dispatch_async(dispatch_get_main_queue(), {
@@ -37,7 +39,6 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     }
     
     func changeMapDisplayMode() {
-        print("toto")
         let actionSheet = UIAlertController(title: "Map Types", message: "Select map type:", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         let normalMapTypeAction = UIAlertAction(title: "Normal", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
@@ -116,8 +117,11 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     
     
     func updateCoor() {
-        let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
-        sendJson(name, coorX: location.coordinate.latitude, coorY: location.coordinate.longitude)
+        let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+        if b && CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse{
+            let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
+            sendJson(name, coorX: location.coordinate.latitude, coorY: location.coordinate.longitude)
+        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -179,14 +183,12 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         }).resume()
         
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let DestViewController : DetailViewController = segue.destinationViewController as! DetailViewController
-        DestViewController.mapDetail = mapKit
-        
-        let DestViewController2 : OptionController = segue.destinationViewController as! OptionController
-        DestViewController2.mapOption = mapKit
-        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+        if b {
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
     
 }

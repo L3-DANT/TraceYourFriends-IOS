@@ -79,7 +79,7 @@ class LoginViewController: UIViewController {
                 
                 realResponse.statusCode == 200 else {
                     
-                    print("ERROR2 : LoginViewController")
+                    print("ERROR 2 : LoginView COntroller")
                     
                     return
                     
@@ -89,10 +89,16 @@ class LoginViewController: UIViewController {
                 
                 print("le POST: " + postString)
                 
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLogIn")
-                NSUserDefaults.standardUserDefaults().setValue(userEmail, forKey: "myName")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                self.dismissViewControllerAnimated(true, completion: nil)
+                if (postString == "200"){
+                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLogIn")
+                    NSUserDefaults.standardUserDefaults().setValue(userEmail, forKey: "myName")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }else{
+                    self.displayErrorMessage("Wrong Login or Password")
+                    return
+                }
+                
 
                 
                 /*if(postString != "null"){
@@ -119,7 +125,7 @@ class LoginViewController: UIViewController {
                     pusher.connect()
                 }*/
                 
-                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
+                //self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
                 
             }
             
@@ -136,14 +142,15 @@ class LoginViewController: UIViewController {
     
     func displayErrorMessage(userMessage:String){
         
-        let myAlert = UIAlertController(title: "Alert", message:userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
-        
-        myAlert.addAction(okAction)
-        
-        self.presentViewController(myAlert, animated: true, completion: nil)
-        
+        dispatch_async(dispatch_get_main_queue(), {
+            let myAlert = UIAlertController(title: "Alert", message:userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
+            
+            myAlert.addAction(okAction)
+            
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        })
     }
 
 }

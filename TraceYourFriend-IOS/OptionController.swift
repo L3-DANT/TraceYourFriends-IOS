@@ -20,10 +20,13 @@ enum TravelModes: Int {
     case bicycling
 }
 class OptionController: UIViewController {
+    
+    var locationManager: CLLocationManager!
 
     var travelMode = TravelModes.driving
     
     var mapOption = MKMapView()
+    
     
     weak var delegate : OptionControllerDelegate?
     
@@ -47,6 +50,11 @@ class OptionController: UIViewController {
         self.presentViewController(vc, animated: true, completion: nil)
     }
 
+    
+    //TODO
+    @IBAction func disablePermissionLocation(sender: AnyObject) {
+        
+    }
     
     //TODO
     @IBAction func changeTravelMode(sender: AnyObject) {
@@ -81,7 +89,14 @@ class OptionController: UIViewController {
     }
     //TODO
     @IBAction func changeMapType(sender: AnyObject) {
-        delegate!.changeMapDisplayMode()
+        delegate?.changeMapDisplayMode()
         
+    }
+    
+    func locationManager(manager: CLLocationManager,didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    {
+        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+            manager.pausesLocationUpdatesAutomatically = true
+        }
     }
 }

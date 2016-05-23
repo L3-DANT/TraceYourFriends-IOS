@@ -51,7 +51,6 @@
                     <tabBarItem key="tabBarItem" title="Maps" image="compass" id="gaP-fI-flc"/>
                     <connections>
                         <outlet property="mapKit" destination="ex6-Rn-okV" id="wFa-Vk-bqF"/>
-                        <segue destination="tnT-2b-hT0" kind="showDetail" id="5FX-q2-vxh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVh-wn-iJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -120,10 +119,22 @@
                                     <action selector="changeTravelMode:" destination="DbE-Ia-nth" eventType="touchUpInside" id="KSJ-Yi-VQz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Om5-6V-COl">
+                                <rect key="frame" x="10" y="211" width="580" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Disable location permission">
+                                    <color key="titleColor" red="0.99255631010000001" green="0.96969605839999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeTravelMode:" destination="DbE-Ia-nth" eventType="touchUpInside" id="Bgj-8i-lxo"/>
+                                    <action selector="disablePermissionLocation:" destination="DbE-Ia-nth" eventType="touchUpInside" id="7pC-6w-Mze"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="51C-Bo-p0p" firstAttribute="top" secondItem="wtF-dJ-clC" secondAttribute="bottom" constant="10" id="MrB-Ll-2hn"/>
+                            <constraint firstItem="Om5-6V-COl" firstAttribute="leading" secondItem="tef-Re-oKf" secondAttribute="leading" constant="10" id="NVG-40-6za"/>
                             <constraint firstAttribute="trailing" secondItem="3Ff-k9-QfO" secondAttribute="trailing" constant="10" id="Q97-8V-GZm"/>
                             <constraint firstAttribute="trailing" secondItem="wtF-dJ-clC" secondAttribute="trailing" constant="10" id="U7R-Kp-MXg"/>
                             <constraint firstAttribute="trailing" secondItem="R8L-cY-DfH" secondAttribute="trailing" constant="10" id="Wrl-DI-Cvd"/>
@@ -131,7 +142,9 @@
                             <constraint firstItem="3Ff-k9-QfO" firstAttribute="leading" secondItem="tef-Re-oKf" secondAttribute="leading" constant="10" id="Xki-kg-1iK"/>
                             <constraint firstItem="R8L-cY-DfH" firstAttribute="leading" secondItem="tef-Re-oKf" secondAttribute="leading" constant="10" id="YFD-zd-sWF"/>
                             <constraint firstItem="wtF-dJ-clC" firstAttribute="top" secondItem="R8L-cY-DfH" secondAttribute="bottom" constant="70" id="dxp-Bq-4vz"/>
+                            <constraint firstAttribute="trailing" secondItem="Om5-6V-COl" secondAttribute="trailing" constant="10" id="fs0-5E-jLV"/>
                             <constraint firstItem="R8L-cY-DfH" firstAttribute="top" secondItem="3Ff-k9-QfO" secondAttribute="bottom" constant="70" id="ktz-pj-3xR"/>
+                            <constraint firstItem="3Ff-k9-QfO" firstAttribute="top" secondItem="Om5-6V-COl" secondAttribute="bottom" constant="70" id="pvh-26-0o3"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings" id="Ezo-MT-Rlz"/>
@@ -755,7 +768,6 @@
         <image name="user_male_circle" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KBA-Lj-vEm"/>
-        <segue reference="5FX-q2-vxh"/>
+        <segue reference="whR-iH-yyZ"/>
     </inferredMetricsTieBreakers>
 </document>
