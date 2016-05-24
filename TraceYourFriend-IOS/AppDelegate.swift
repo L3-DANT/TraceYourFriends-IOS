@@ -1,4 +1,4 @@
-//
+ //
 //  AppDelegate.swift
 //  TraceYourFriend-IOS
 //
@@ -16,7 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     let core = CLLocationManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        core.requestWhenInUseAuthorization()
+        let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+        if b{
+            core.requestWhenInUseAuthorization()
+        }
         let splitVC: UISplitViewController? = self.window?.rootViewController as? UISplitViewController
         
         if splitVC != nil {
@@ -38,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let detailNC: UINavigationController? = secondaryViewController as? UINavigationController
         if detailNC != nil{
             let noSelectionVC: NoSelectionViewController? = detailNC?.topViewController as? NoSelectionViewController
-            if noSelectionVC  != nil{
+            if noSelectionVC != nil{
                 return true
             }
         }

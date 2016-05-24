@@ -38,7 +38,7 @@ class DetailViewController: UIViewController {
                 }else if detailUser.category == "Request"{
                     detailDescriptionLabel.text = "Would you like to accept : " + detailUser.name + " ?"
                     title = detailUser.name
-                }else{
+                }else if detailUser.category == "Favorite"{
                     detailDescriptionLabel.text = "Profile of your favorite friend : " + detailUser.name
                     title = detailUser.name
                     acceptButton.setTitle("Trace " + detailUser.name, forState: .Normal)
@@ -50,7 +50,7 @@ class DetailViewController: UIViewController {
     
     
     //Accept request or trace if the user is already a friend or favorite
-    
+    //TODO
     @IBAction func acceptRequest(sender: AnyObject) {
         let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
 
@@ -60,30 +60,28 @@ class DetailViewController: UIViewController {
             message("You just added as friend " + user!.name)
             viewDidLoad()
         }else{
-            let initialLocation = CLLocation(latitude: user!.coorX, longitude: user!.coorY)
+            //TOODO
+            let initialLocation = CLLocationCoordinate2D(latitude: user!.coorX, longitude: user!.coorY)
+            print("bon")
             centerMapOnLocation(initialLocation)
+            print("jour")
         }
         
     }
     
     
     //Decline request or delete the user if he's already a friend or favorite
-    
+    //TODO
     @IBAction func declineRequest(sender: AnyObject) {
         let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
         if user?.category == "Request" {
             sendJson((detailUser!.name), bool: false)
-            user!.category = "Friends"
-            message("You just decline " + user!.name)
+            user!.category = "NotFriends"
+            message("You declined " + user!.name)
             viewDidLoad()
         }else{
-            var i : Int = 0
-            for ami in Amis.getInstance.ami {
-                if ami.name == detailUser?.name {
-                    Amis.getInstance.ami.removeAtIndex(i)
-                }
-                i += 1
-            }
+            message("You removed " + user!.name)
+            user!.category = "NotFriends"
         }
     }
     
@@ -155,18 +153,21 @@ class DetailViewController: UIViewController {
     
     func message(userMessage:String){
         
-        let myAlert = UIAlertController(title: "Alert", message:userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
-        
-        myAlert.addAction(okAction)
-        
-        self.presentViewController(myAlert, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), {
+            let myAlert = UIAlertController(title: "Alert", message:userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
+            
+            myAlert.addAction(okAction)
+            
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        })
+
         
     }
     let regionRadius: CLLocationDistance = 1000
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
+    func centerMapOnLocation(location: CLLocationCoordinate2D) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius, regionRadius)
         self.mapDetail.setRegion(coordinateRegion, animated: true)
     }
 }

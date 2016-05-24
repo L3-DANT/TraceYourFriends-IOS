@@ -10,6 +10,9 @@ import UIKit
 import MapKit
 
 
+protocol OptionControllerDelegate : class {
+    func changeMapDisplayMode()
+}
 
 enum TravelModes: Int {
     case driving
@@ -17,10 +20,15 @@ enum TravelModes: Int {
     case bicycling
 }
 class OptionController: UIViewController {
+    
+    var locationManager: CLLocationManager!
 
     var travelMode = TravelModes.driving
     
     var mapOption = MKMapView()
+    
+    
+    weak var delegate : OptionControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +49,14 @@ class OptionController: UIViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
         self.presentViewController(vc, animated: true, completion: nil)
     }
-    
 
+    
+    //TODO
+    @IBAction func disablePermissionLocation(sender: AnyObject) {
+        
+    }
+    
+    //TODO
     @IBAction func changeTravelMode(sender: AnyObject) {
         let actionSheet = UIAlertController(title: "Travel Mode", message: "Select travel mode:", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
@@ -73,33 +87,16 @@ class OptionController: UIViewController {
         presentViewController(actionSheet, animated: true, completion: nil)
 
     }
+    //TODO
     @IBAction func changeMapType(sender: AnyObject) {
-        let actionSheet = UIAlertController(title: "Map Types", message: "Select map type:", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        delegate?.changeMapDisplayMode()
         
-        let normalMapTypeAction = UIAlertAction(title: "Normal", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            //self.viewMap.mapType = kGMSTypeNormal
-            self.mapOption.mapType = .Standard
+    }
+    
+    func locationManager(manager: CLLocationManager,didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    {
+        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+            manager.pausesLocationUpdatesAutomatically = true
         }
-        
-        let satelliteMapTypeAction = UIAlertAction(title: "Satellite", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            //self.viewMap.mapType = kGMSTypeTerrain
-            self.mapOption.mapType = .Satellite
-        }
-        
-        let hybridMapTypeAction = UIAlertAction(title: "Hybrid", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            self.mapOption.mapType = .Hybrid
-        }
-        
-        let cancelAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
-            
-        }
-        
-        actionSheet.addAction(normalMapTypeAction)
-        actionSheet.addAction(satelliteMapTypeAction)
-        actionSheet.addAction(hybridMapTypeAction)
-        actionSheet.addAction(cancelAction)
-        
-        presentViewController(actionSheet, animated: true, completion: nil)
-        
     }
 }
