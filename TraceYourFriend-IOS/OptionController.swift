@@ -16,21 +16,17 @@ protocol OptionControllerDelegate : NSObjectProtocol {
     //func disableLocation(sender: UIButton)
     //func enableLocation(sender: UIButton)
 }
-
-enum TravelModes: Int {
-    case driving
-    case walking
-    case bicycling
-}
 class OptionController: UIViewController {
     
     var locationManager: CLLocationManager!
-
-    var travelMode = TravelModes.driving
     
     var mapOption = MKMapView()
     
     @IBOutlet weak var permitButton: UIButton!
+    
+    @IBOutlet weak var travelButton: UIButton!
+    
+    @IBOutlet weak var mapButton: UIButton!
     
     weak var delegate : OptionControllerDelegate?
     
@@ -38,6 +34,11 @@ class OptionController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        permitButton.backgroundColor = UIColor.candyBlue()
+        permitButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        travelButton.backgroundColor = UIColor.candyBlue()
+        travelButton.setTitleColor(UIColor.purpleColor(), forState: .Normal)
+        mapButton.backgroundColor = UIColor.candyBlue()
     }
 
     override func didReceiveMemoryWarning() {
