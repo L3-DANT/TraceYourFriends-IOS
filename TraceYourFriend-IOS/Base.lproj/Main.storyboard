@@ -126,7 +126,6 @@
                                     <color key="titleColor" red="0.99255631010000001" green="0.96969605839999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="changeTravelMode:" destination="DbE-Ia-nth" eventType="touchUpInside" id="Bgj-8i-lxo"/>
                                     <action selector="disablePermissionLocation:" destination="DbE-Ia-nth" eventType="touchUpInside" id="7pC-6w-Mze"/>
                                 </connections>
                             </button>
@@ -148,6 +147,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings" id="Ezo-MT-Rlz"/>
+                    <connections>
+                        <outlet property="permitButton" destination="Om5-6V-COl" id="DcB-6e-5hC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvU-CI-HQe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

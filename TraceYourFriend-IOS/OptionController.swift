@@ -10,8 +10,11 @@ import UIKit
 import MapKit
 
 
-protocol OptionControllerDelegate : class {
+protocol OptionControllerDelegate : NSObjectProtocol {
     func changeMapDisplayMode()
+    func changeTypeDisplayMode()
+    //func disableLocation(sender: UIButton)
+    //func enableLocation(sender: UIButton)
 }
 
 enum TravelModes: Int {
@@ -27,6 +30,7 @@ class OptionController: UIViewController {
     
     var mapOption = MKMapView()
     
+    @IBOutlet weak var permitButton: UIButton!
     
     weak var delegate : OptionControllerDelegate?
     
@@ -44,59 +48,25 @@ class OptionController: UIViewController {
     @IBAction func logoutTapped(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isUserLogIn")
         NSUserDefaults.standardUserDefaults().synchronize()
-        
-        
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
         self.presentViewController(vc, animated: true, completion: nil)
     }
 
-    
-    //TODO
     @IBAction func disablePermissionLocation(sender: AnyObject) {
-        
+        UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
     }
-    
-    //TODO
     @IBAction func changeTravelMode(sender: AnyObject) {
-        let actionSheet = UIAlertController(title: "Travel Mode", message: "Select travel mode:", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        let drivingModeAction = UIAlertAction(title: "Driving", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            self.travelMode = TravelModes.driving
-            //self.recreateRoute()
-        }
-        
-        let walkingModeAction = UIAlertAction(title: "Walking", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            self.travelMode = TravelModes.walking
-            //self.recreateRoute()
-        }
-        
-        let bicyclingModeAction = UIAlertAction(title: "Bicycling", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            self.travelMode = TravelModes.bicycling
-            //self.recreateRoute()
-        }
-        
-        let closeAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
-            
-        }
-        
-        actionSheet.addAction(drivingModeAction)
-        actionSheet.addAction(walkingModeAction)
-        actionSheet.addAction(bicyclingModeAction)
-        actionSheet.addAction(closeAction)
-        
-        presentViewController(actionSheet, animated: true, completion: nil)
-
+        self.delegate?.changeTypeDisplayMode()
     }
-    //TODO
     @IBAction func changeMapType(sender: AnyObject) {
-        delegate?.changeMapDisplayMode()
+        self.delegate?.changeMapDisplayMode()
         
     }
-    
-    func locationManager(manager: CLLocationManager,didChangeAuthorizationStatus status: CLAuthorizationStatus)
-    {
-        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
-            manager.pausesLocationUpdatesAutomatically = true
+    override func viewWillAppear(animated: Bool) {
+        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse{
+            permitButton.setTitle("Disable permission location", forState: .Normal)
+        }else{
+            permitButton.setTitle("Enable permission location", forState: .Normal)
         }
     }
 }

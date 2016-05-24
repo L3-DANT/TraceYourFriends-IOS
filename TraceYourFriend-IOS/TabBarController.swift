@@ -16,6 +16,9 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let traceController = self.viewControllers?[0] as? TraceController
+        let optionsController = self.viewControllers?[2] as? OptionController
+        optionsController?.delegate = traceController
     }
 
     override func didReceiveMemoryWarning() {
