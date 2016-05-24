@@ -14,13 +14,11 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     @IBOutlet weak var mapKit: MKMapView!
     var locationManager: CLLocationManager!
     var location: CLLocation!
-    var optionController = OptionController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapKit.setUserTrackingMode(.Follow, animated: true)
         mapKit.delegate = self
-        optionController.delegate = self
         
         
         if (CLLocationManager.locationServicesEnabled()) {
@@ -42,12 +40,10 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         let actionSheet = UIAlertController(title: "Map Types", message: "Select map type:", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         let normalMapTypeAction = UIAlertAction(title: "Normal", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            //self.viewMap.mapType = kGMSTypeNormal
             self.mapKit.mapType = .Standard
         }
         
         let satelliteMapTypeAction = UIAlertAction(title: "Satellite", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            //self.viewMap.mapType = kGMSTypeTerrain
             self.mapKit.mapType = .Satellite
         }
         
@@ -67,6 +63,46 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         presentViewController(actionSheet, animated: true, completion: nil)
         
     }
+    
+    func changeTypeDisplayMode() {
+        let actionSheet = UIAlertController(title: "Travel Mode", message: "Select travel mode:", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let drivingModeAction = UIAlertAction(title: "Driving", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            //self.travelMode = TravelModes.driving
+            //self.recreateRoute()
+        }
+        
+        let walkingModeAction = UIAlertAction(title: "Walking", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            //self.travelMode = TravelModes.walking
+            //self.recreateRoute()
+        }
+        
+        let bicyclingModeAction = UIAlertAction(title: "Bicycling", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            //self.travelMode = TravelModes.bicycling
+            //self.recreateRoute()
+        }
+        
+        let closeAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
+            
+        }
+        
+        actionSheet.addAction(drivingModeAction)
+        actionSheet.addAction(walkingModeAction)
+        actionSheet.addAction(bicyclingModeAction)
+        actionSheet.addAction(closeAction)
+        
+        presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    /*func disableLocation(permitButton: UIButton) {
+        permitButton.setTitle("Enable permission location", forState: .Normal)
+        self.locationManager.stopUpdatingLocation()
+    }
+    
+    func enableLocation(permitButton: UIButton) {
+        permitButton.setTitle("Disable permission location", forState: .Normal)
+        self.locationManager.startUpdatingLocation()
+    }*/
     
     func showFriends(){
         for ami in Amis.getInstance.ami {
