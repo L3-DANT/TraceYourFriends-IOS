@@ -20,11 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         if b{
             core.requestWhenInUseAuthorization()
         }
-        let splitVC: UISplitViewController? = self.window?.rootViewController as? UISplitViewController
-        
-        if splitVC != nil {
-            splitVC?.delegate = self
-        }
         
         UISearchBar.appearance().barTintColor = UIColor.whiteColor()
         UISearchBar.appearance().tintColor = UIColor.candyBlue()
@@ -36,17 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return true
     }
     
-    //UISPlitViewControllerDelegate
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
-        let detailNC: UINavigationController? = secondaryViewController as? UINavigationController
-        if detailNC != nil{
-            let noSelectionVC: NoSelectionViewController? = detailNC?.topViewController as? NoSelectionViewController
-            if noSelectionVC != nil{
-                return true
-            }
-        }
-        return false
-    }
 }
 
 extension UIColor {
