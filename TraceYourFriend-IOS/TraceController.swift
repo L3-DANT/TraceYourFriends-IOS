@@ -14,14 +14,12 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     @IBOutlet weak var mapKit: MKMapView!
     var locationManager: CLLocationManager!
     var location: CLLocation!
-    var optionController = OptionController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         mapKit.setUserTrackingMode(.Follow, animated: true)
         mapKit.delegate = self
-        optionController.delegate = self
-        
+
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
             locationManager.delegate = self
