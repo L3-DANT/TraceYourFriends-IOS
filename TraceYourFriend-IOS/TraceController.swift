@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, OptionControllerDelegate {
+class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, OptionControllerDelegate, DetailViewControllerDelegate {
     
     @IBOutlet weak var mapKit: MKMapView!
     var locationManager: CLLocationManager!
@@ -93,16 +93,10 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         
         presentViewController(actionSheet, animated: true, completion: nil)
     }
-    
-    /*func disableLocation(permitButton: UIButton) {
-        permitButton.setTitle("Enable permission location", forState: .Normal)
-        self.locationManager.stopUpdatingLocation()
+    func centerOnFriend(user: User) {
+        let userLocation: CLLocationCoordinate2D =  CLLocationCoordinate2D(latitude: user.coorX, longitude: user.coorY)
+        centerMapOnLocation(userLocation)
     }
-    
-    func enableLocation(permitButton: UIButton) {
-        permitButton.setTitle("Disable permission location", forState: .Normal)
-        self.locationManager.startUpdatingLocation()
-    }*/
     
     func showFriends(){
         for ami in Amis.getInstance.ami {
@@ -226,7 +220,11 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             locationManager.requestWhenInUseAuthorization()
         }
     }
-    
+    let regionRadius: CLLocationDistance = 1000
+    func centerMapOnLocation(location: CLLocationCoordinate2D) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius, regionRadius)
+        mapKit.setRegion(coordinateRegion, animated: true)
+    }
 }
 
 
