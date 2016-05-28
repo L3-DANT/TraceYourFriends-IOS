@@ -148,9 +148,11 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     
     func updateCoor() {
         let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+        let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
         if b && CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse{
-            let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
-            sendJson(name, coorX: location.coordinate.latitude, coorY: location.coordinate.longitude)
+            sendJson(name, coorX: location.coordinate.latitude as Double, coorY: location.coordinate.longitude as Double)
+        }else{
+            sendJson(name, coorX: 0.0, coorY: 0.0)
         }
     }
     
@@ -162,13 +164,14 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     
     func sendJson(name: String, coorX: Double, coorY: Double){
         
+        
         let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/coord"
         
         let url = NSURL(string: postEndpoint)!
         
         let session = NSURLSession.sharedSession()
         
-        let postParams : [String: AnyObject] = ["nameOrEmail": name, "coorX": coorX, "coorY": coorY]
+        let postParams : [String: AnyObject] = ["name": name, "coorX": coorX, "coorY": coorY]
         
         
         
@@ -190,14 +193,13 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             
         }
         
-        
         session.dataTaskWithRequest(request, completionHandler: { ( data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             
             guard let realResponse = response as? NSHTTPURLResponse where
                 
                 realResponse.statusCode == 200 else {
                     
-                    //print("ERROR2 : TraceController")
+                    print("ERROR2 : TraceController")
                     
                     return
                     
@@ -205,9 +207,24 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             
             if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
                 
-                print("le POST: " + postString)
-                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
+                print("le POST trace: " + postString)
                 
+                if (postString == "null"){
+                    return
+                }
+                var friends = postString.characters.split{$0 == ","}.map(String.init)
+                let ami: Amis = Amis.getInstance
+                var user :User
+                print(ami.ami)
+                ami.deleteAll("Request")
+                for i in 0...friends.count-1 {
+                    friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    friends[i] = friends[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    user = User(name: friends[i], category: "Request", coorX: 0, coorY: 0)
+                    ami.add(user)
+                }
+                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
             }
             
         }).resume()

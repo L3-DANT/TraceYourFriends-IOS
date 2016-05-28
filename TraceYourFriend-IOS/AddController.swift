@@ -12,11 +12,30 @@ class AddController: UITableViewController {
     
     var contacts: [String] = []
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    var users = [User]()
     
-    @IBAction func inviteContact(sender: AnyObject) {
+    override func viewDidLoad() {
+        users = Amis.getInstance.users
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("CellUser", forIndexPath: indexPath)
+        let user: User
         
-       let indexPath = tableView.indexPathForSelectedRow
+        user = users[indexPath.row]
+        cell.textLabel?.text = user.name
+        cell.detailTextLabel?.text = user.category
+        return cell
+
+    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //Request
+        let indexPath = tableView.indexPathForSelectedRow
         
         let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/invite"
         
@@ -60,7 +79,7 @@ class AddController: UITableViewController {
             if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
                 
                 print("le POST: " + postString)
-            self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
+                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
                 
             }
             
@@ -127,13 +146,6 @@ class AddController: UITableViewController {
             
         }).resume()
 
-    }
-    
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        cell.textLabel?.text = self.contacts[indexPath.row]
-        return cell
     }
 
     

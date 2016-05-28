@@ -536,15 +536,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="ZDg-qV-oJf">
-                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="8eh-MN-atX" detailTextLabel="hiJ-xW-y56" style="IBUITableViewCellStyleSubtitle" id="4Vm-xK-Px5">
-                                <rect key="frame" x="0.0" y="136" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellUser" textLabel="8eh-MN-atX" detailTextLabel="hiJ-xW-y56" style="IBUITableViewCellStyleSubtitle" id="4Vm-xK-Px5">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Vm-xK-Px5" id="0Cg-k4-qd8">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -573,23 +567,7 @@
                             <outlet property="delegate" destination="XYL-yh-cWe" id="Rn3-oL-aGt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Friends" id="lVB-5W-6uZ">
-                        <barButtonItem key="rightBarButtonItem" id="zlw-o4-MEO">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JJH-f8-af5">
-                                <rect key="frame" x="543" y="7" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Invite">
-                                    <color key="titleColor" red="0.99255631010000001" green="0.96969605839999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="inviteContact:" destination="XYL-yh-cWe" eventType="touchUpInside" id="zY6-9S-UTO"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="searchBar" destination="ZDg-qV-oJf" id="8dj-Bi-j2o"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Add Friends" id="lVB-5W-6uZ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bu7-qu-gMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

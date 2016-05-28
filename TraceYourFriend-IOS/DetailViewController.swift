@@ -63,6 +63,7 @@ class DetailViewController: UIViewController {
             sendJson((detailUser!.name), bool: true)
             user!.category = "Friends"
             message("You just added as friend " + user!.name)
+            NSUserDefaults.standardUserDefaults().setValue(Amis.getInstance.ami, forKey: "tabAmi")
             viewDidLoad()
         }else{
             self.delegate?.centerOnFriend(user!)
@@ -78,6 +79,7 @@ class DetailViewController: UIViewController {
             sendJson((detailUser!.name), bool: false)
             user!.category = "NotFriends"
             message("You declined " + user!.name)
+            NSUserDefaults.standardUserDefaults().setValue(Amis.getInstance.ami, forKey: "tabAmi")
             viewDidLoad()
         }else{
             message("You removed " + user!.name)
