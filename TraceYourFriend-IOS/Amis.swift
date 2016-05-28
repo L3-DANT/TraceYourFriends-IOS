@@ -9,13 +9,15 @@
 import UIKit
 
 class Amis {
-    var ami = [
-        User(name:"Alban", category: "Friends",coorX:48.843293, coorY: 2.283060),
-        User(name:"Aniss", category: "Friends",coorX: 48.996148, coorY: 1.686047),
-        User(name:"Kaci", category: "Request",coorX: 48.928212, coorY: 2.386411),
-        User(name:"Leila", category: "Request",coorX: 48.910410, coorY: 2.280922),
-        User(name:"Romann", category: "Favorite",coorX:48.995689, coorY: 1.900270),
-        ]
+    var ami = [User]()
+    var users = [
+        User(name:"Adrien", category: "User",coorX:49.843293, coorY: 2.283060),
+        User(name:"Olivier", category: "User",coorX: 47.996148, coorY: 1.686047),
+        User(name:"Reda", category: "User",coorX: 50.928212, coorY: 2.386411),
+        User(name:"Julien", category: "User",coorX: 46.910410, coorY: 2.280922),
+        User(name:"Anne", category: "User",coorX:45.995689, coorY: 1.900270),
+    ]
+    var request = [User]()
     static let getInstance = Amis()
     
     func userFromName(name :String) -> User?{
@@ -25,5 +27,16 @@ class Amis {
             }
         }
         return nil
+    }
+    func deleteAll(str : String) {
+        if (str == "Friends" || str == "All"){
+            ami = []
+        }
+        if(str == "Request" || str == "All"){
+            request = []
+        }
+    }
+    func add(user: User) {
+        ami.append(user)
     }
 }

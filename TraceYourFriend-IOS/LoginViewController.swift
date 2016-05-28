@@ -89,19 +89,7 @@ class LoginViewController: UIViewController {
                 
                 print("le POST: " + postString)
                 
-                if (postString == "200"){
-                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLogIn")
-                    NSUserDefaults.standardUserDefaults().setValue(userEmail, forKey: "myName")
-                    NSUserDefaults.standardUserDefaults().synchronize()
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }else{
-                    self.displayErrorMessage("Wrong Login or Password")
-                    return
-                }
-                
-
-                
-                /*if(postString != "null"){
+                if(postString != "null"){
                     //Then LogIn is successfully done
                     NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLogIn")
                     NSUserDefaults.standardUserDefaults().setValue(userEmail, forKey: "myName")
@@ -109,24 +97,33 @@ class LoginViewController: UIViewController {
                     self.dismissViewControllerAnimated(true, completion: nil)
                     
                     var friends = postString.characters.split{$0 == ","}.map(String.init)
-                    
-                    var channel = [PusherChannel]()
+                    let ami: Amis = Amis.getInstance
+                    var user :User
+                    ami.deleteAll("All")
+                    //var channel = [PusherChannel]()
                     for i in 0...friends.count-1 {
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                        channel.append(pusher.subscribe(friends[i]))
-                        channel[i].bind("coor", callback: { (data: AnyObject?) -> Void in
-                            if let data = data as? String {
+                        //channel.append(pusher.subscribe(friends[i]))
+                        //channel[i].bind("coor", callback: { (data: AnyObject?) -> Void in
+                            /*if let data = data as? String {
                                 Amis.getInstance.ami[i] = User(name: data, category: "",coorX: 0.0,coorY: 0.0)
                             }
-                        })
+                        })*/
+                        if (i != 0){
+                            user = User(name: friends[i], category: "Friends", coorX: 0, coorY: 0)
+                            ami.add(user)
+                        }else{
+                            NSUserDefaults.standardUserDefaults().setValue(friends[0], forKey: "myName")
+                        }
                     }
-                    pusher.connect()
-                }*/
-                
+                    //pusher.connect()
+                }else{
+                    self.displayErrorMessage("Wrong Login or Password")
+                    return
+                }
                 //self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
-                
             }
             
         }).resume()

@@ -18,10 +18,6 @@ protocol OptionControllerDelegate : NSObjectProtocol {
 }
 class OptionController: UIViewController {
     
-    var locationManager: CLLocationManager!
-    
-    var mapOption = MKMapView()
-    
     @IBOutlet weak var permitButton: UIButton!
     
     @IBOutlet weak var travelButton: UIButton!
