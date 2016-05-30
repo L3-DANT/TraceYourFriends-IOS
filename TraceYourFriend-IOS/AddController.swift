@@ -10,29 +10,47 @@ import UIKit
 
 class AddController: UITableViewController {
     
-    var contacts: [String] = []
-    
+    var filteredUser = [User]()
+    let searchController = UISearchController(searchResultsController: nil)
     var users = [User]()
     
     override func viewDidLoad() {
-        users = Amis.getInstance.users
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+    }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredUser = users.filter { user in
+            return user.name.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredUser.count
+        }
         return users.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CellUser", forIndexPath: indexPath)
         let user: User
-        
-        user = users[indexPath.row]
+        if searchController.active && searchController.searchBar.text != "" {
+            user = filteredUser[indexPath.row]
+        } else {
+            user = users[indexPath.row]
+        }
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.category
         return cell
+        
 
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+   /* override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //Request
         let indexPath = tableView.indexPathForSelectedRow
@@ -43,7 +61,7 @@ class AddController: UITableViewController {
         
         let session = NSURLSession.sharedSession()
         
-        let postParams : [String: AnyObject] = ["inviteName": contacts[indexPath!.row]]
+        let postParams : [String: AnyObject] = [:]
         
         let request = NSMutableURLRequest(URL: url)
         
@@ -85,16 +103,16 @@ class AddController: UITableViewController {
             
         }).resume()
         
-    }
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    }*/
+   func searchBarUsers(searchText: String) {
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/search/contact"
+        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/search/contact"
         
         let url = NSURL(string: postEndpoint)!
         
         let session = NSURLSession.sharedSession()
         
-        let postParams : [String: AnyObject] = ["search": searchText]
+        let postParams : [String: AnyObject] = ["mail": searchText]
         
         
         
@@ -131,26 +149,31 @@ class AddController: UITableViewController {
             
             if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
                 
-                print("le POST: " + postString)
+                print("le POST recherche: " + postString)
                 
-                
-                self.contacts = postString.characters.split{$0 == ","}.map(String.init)
-                for i in 0...self.contacts.count-1 {
-                    self.contacts[i] = self.contacts[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    self.contacts[i] = self.contacts[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    self.contacts[i] = self.contacts[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                }
-                
-                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
+                self.performSelectorOnMainThread(#selector(AddController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
             }
             
         }).resume()
 
     }
-
+    
+    func updatePostLabel(string: String) {
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension AddController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        var str : String
+        str = searchController.searchBar.text!
+        if str.characters.count > 3 {
+            filterContentForSearchText(str)
+            searchBarUsers(str)
+        }
     }
 }

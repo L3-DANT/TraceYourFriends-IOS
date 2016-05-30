@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import PusherSwift
+import PusherSwift
 
 class LoginViewController: UIViewController {
     
@@ -29,10 +29,10 @@ class LoginViewController: UIViewController {
     
     @IBAction func LoginClicked(sender: AnyObject) {
         
-        /*let pusher = Pusher(
+        let pusher = Pusher(
             key:"37c3b876be2d4696857a",
             options: ["cluster": "eu"]
-        )*/
+        )
         
         let userEmail:String! = emailTextBox.text
         let userPassword:String! = passwordTextBox.text
@@ -100,25 +100,25 @@ class LoginViewController: UIViewController {
                     let ami: Amis = Amis.getInstance
                     var user :User
                     ami.deleteAll("All")
-                    //var channel = [PusherChannel]()
+                    var channel = [PusherChannel]()
                     for i in 0...friends.count-1 {
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                        //channel.append(pusher.subscribe(friends[i]))
-                        //channel[i].bind("coor", callback: { (data: AnyObject?) -> Void in
-                            /*if let data = data as? String {
+                        channel.append(pusher.subscribe(friends[i]))
+                        channel[i].bind("coor", callback: { (data: AnyObject?) -> Void in
+                            if let data = data as? String {
                                 Amis.getInstance.ami[i] = User(name: data, category: "",coorX: 0.0,coorY: 0.0)
                             }
-                        })*/
+                        })
                         if (i != 0){
                             user = User(name: friends[i], category: "Friends", coorX: 0, coorY: 0)
-                            ami.add(user)
+                            ami.add(user, str: "Friends")
                         }else{
                             NSUserDefaults.standardUserDefaults().setValue(friends[0], forKey: "myName")
                         }
                     }
-                    //pusher.connect()
+                    pusher.connect()
                 }else{
                     self.displayErrorMessage("Wrong Login or Password")
                     return

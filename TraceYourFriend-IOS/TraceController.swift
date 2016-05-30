@@ -207,28 +207,32 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             
             if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
                 
-                print("le POST trace: " + postString)
+                //print("le POST trace :" + postString)
                 
-                if (postString == "null"){
-                    return
+                if (postString == "[]"){
+                    
+                }else{
+                    var request = postString.characters.split{$0 == ","}.map(String.init)
+                    let ami : Amis = Amis.getInstance
+                    var user :User
+                    ami.deleteAll("Request")
+                    for i in 0...request.count-1 {
+                        request[i] = request[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        request[i] = request[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        request[i] = request[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        user = User(name: request[i], category: "Request", coorX: 0, coorY: 0)
+                        ami.add(user, str: "Request")
+                    }
+
                 }
-                var friends = postString.characters.split{$0 == ","}.map(String.init)
-                let ami: Amis = Amis.getInstance
-                var user :User
-                print(ami.ami)
-                ami.deleteAll("Request")
-                for i in 0...friends.count-1 {
-                    friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    friends[i] = friends[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    user = User(name: friends[i], category: "Request", coorX: 0, coorY: 0)
-                    ami.add(user)
-                }
-                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
+                self.performSelectorOnMainThread(#selector(TraceController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
             }
             
         }).resume()
         
+    }
+    
+    func updatePostLabel(str : String)  {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
