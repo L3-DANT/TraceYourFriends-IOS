@@ -15,11 +15,11 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     var locationManager: CLLocationManager!
     var location: CLLocation!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapKit.setUserTrackingMode(.Follow, animated: true)
         mapKit.delegate = self
-        
         
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
@@ -220,14 +220,14 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
                         request[i] = request[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         request[i] = request[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         request[i] = request[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                        user = User(name: request[i], category: "Request", coorX: 0, coorY: 0)
-                        ami.add(user, str: "Request")
+                        if (i != 0){
+                            user = User(name: request[i], category: "Request", coorX: 0, coorY: 0)
+                            ami.add(user, str: "Request")
+                        }
                     }
-
                 }
                 self.performSelectorOnMainThread(#selector(TraceController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
             }
-            
         }).resume()
         
     }

@@ -57,15 +57,12 @@ class DetailViewController: UIViewController {
     
     //Accept request or trace if the user is already a friend or favorite
     @IBAction func acceptRequest(sender: AnyObject) {
-        let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
-
-        if user?.category == "Request" {
+        if detailUser?.category == "Request" {
+            message("You just added as friend " + detailUser!.name)
             sendJson((detailUser!.name), bool: true)
-            user!.category = "Friends"
-            message("You just added as friend " + user!.name)
             viewDidLoad()
         }else{
-            self.delegate?.centerOnFriend(user!)
+            self.delegate?.centerOnFriend(detailUser!)
         }
         
     }
@@ -73,16 +70,13 @@ class DetailViewController: UIViewController {
     
     //Decline request or delete the user if he's already a friend or favorite
     @IBAction func declineRequest(sender: AnyObject) {
-        let user = Amis.getInstance.userFromName((detailUser?.name)! as String)
-        if user?.category == "Request" {
+        if detailUser?.category == "Request" {
             sendJson((detailUser!.name), bool: false)
-            user!.category = "NotFriends"
-            message("You declined " + user!.name)
+            message("You declined " + detailUser!.name)
             viewDidLoad()
         }else{
-            message("You removed " + user!.name)
-            user!.category = "NotFriends"
-            sendJsonDelete((detailUser?.name)! as String)
+            message("You removed " + detailUser!.name)
+            sendJsonDelete(detailUser!.name)
         }
     }
     
@@ -95,9 +89,10 @@ class DetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
+    
     func sendJson(nameAmi: String, bool: Bool){
         //Envoi des informations d'enregistrement au serveur
-        
         
         let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/request"
         
@@ -135,7 +130,7 @@ class DetailViewController: UIViewController {
                 
                 realResponse.statusCode == 200 else {
                     
-                    print("ERROR")
+                    print("ERROR : DetailViewController")
                     
                     return
                     
@@ -145,11 +140,14 @@ class DetailViewController: UIViewController {
                 
                 print("le POST: " + postString)
                 
-                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
+                self.performSelectorOnMainThread(#selector(DetailViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
                 
             }
             
         }).resume()
+    }
+    
+    func updatePostLabel(str: String) {
     }
     
     func message(userMessage:String){
@@ -205,7 +203,7 @@ class DetailViewController: UIViewController {
                 
                 realResponse.statusCode == 200 else {
                     
-                    print("ERROR")
+                    print("ERROR : Detail View Controller2")
                     
                     return
                     
@@ -215,7 +213,7 @@ class DetailViewController: UIViewController {
                 
                 print("le POST: " + postString)
                 
-                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
+                self.performSelectorOnMainThread(#selector(DetailViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
                 
             }
             

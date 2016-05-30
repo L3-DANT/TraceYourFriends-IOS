@@ -50,15 +50,7 @@ class ContactViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.collapsed
         super.viewWillAppear(animated)
-        
-        var i : Int = 0
-        for ami in users {
-            if ami.category == "NotFriends" {
-                users.removeAtIndex(i)
-            }
-            i+=1
-        }
-        
+        users = Amis.getInstance.ami + Amis.getInstance.request
         tableView.reloadData()
     }
     

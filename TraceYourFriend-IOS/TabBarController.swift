@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import PusherSwift
 
 class TabBarController: UITabBarController {
     
     var isUserLogIn = false
+    var pusher : Pusher!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pusher = Pusher(
+            key:"37c3b876be2d4696857a",
+            options: ["cluster": "eu"]
+        )
 
         // Do any additional setup after loading the view.
         let traceController = self.viewControllers?[0] as? TraceController
@@ -103,16 +110,33 @@ class TabBarController: UITabBarController {
                     var friends = postString.characters.split{$0 == ","}.map(String.init)
                     let ami: Amis = Amis.getInstance
                     var user :User
+                    let channel = self.pusher.subscribe(friends[0])
                     ami.deleteAll("Friends")
                     for i in 0...friends.count-1 {
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                        user = User(name: friends[i], category: "Friends", coorX: 0, coorY: 0)
-                        ami.add(user, str: "Friends")
                         
+                        channel.bind("coorX/coorY", callback: { (data: AnyObject?) -> Void in
+                            if let data = data as? String {
+                                print(data)
+                                
+                                var coor = data.characters.split{$0 == "/"}.map(String.init)
+                                for i in 0...ami.ami.count-1{
+                                    print(channel.name)
+                                    if ami.ami[i].name == coor[0]{
+                                        ami.ami[i].coorX = Double(coor[1])!
+                                        ami.ami[i].coorY = Double(coor[2])!
+                                    }
+                                }
+                            }
+                        })
+                        if (i != 0){
+                            user = User(name: friends[i], category: "Friends", coorX: 0, coorY: 0)
+                            ami.add(user, str: "Friends")
+                        }
                     }
-
+                    self.pusher.connect()
                 }
                 self.performSelectorOnMainThread(#selector(TabBarController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
             }
