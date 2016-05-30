@@ -25,9 +25,15 @@ class TabBarController: UITabBarController {
         if (b) {
             let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
             sendJson(name)
+            dispatch_async(dispatch_get_main_queue(), {
+                NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(TabBarController.sendJsonWN), userInfo: nil, repeats: true)
+            })
         }
         
-        
+    }
+    func sendJsonWN(){
+        let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
+        sendJson(name)
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,24 +96,23 @@ class TabBarController: UITabBarController {
             
             if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
                 
-                print("le POST: " + postString)
-                if (postString == "null"){
-                    return
-                }
-                var friends = postString.characters.split{$0 == ","}.map(String.init)
-                let ami: Amis = Amis.getInstance
-                var user :User
-                ami.deleteAll("Friends")
-                for i in 0...friends.count-1 {
-                    friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    friends[i] = friends[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                //print("le POST ami: " + postString)
+                if (postString == "[]"){
                     
-                    if(i != 0){
+                }else{
+                    var friends = postString.characters.split{$0 == ","}.map(String.init)
+                    let ami: Amis = Amis.getInstance
+                    var user :User
+                    ami.deleteAll("Friends")
+                    for i in 0...friends.count-1 {
+                        friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        friends[i] = friends[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         user = User(name: friends[i], category: "Friends", coorX: 0, coorY: 0)
-                        ami.add(user)
+                        ami.add(user, str: "Friends")
+                        
                     }
-                    
+
                 }
                 self.performSelectorOnMainThread(#selector(TabBarController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
             }

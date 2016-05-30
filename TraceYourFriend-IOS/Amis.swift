@@ -11,11 +11,11 @@ import UIKit
 class Amis {
     var ami = [User]()
     var users = [
-        User(name:"Adrien", category: "User",coorX:49.843293, coorY: 2.283060),
+        /*User(name:"Adrien", category: "User",coorX:49.843293, coorY: 2.283060),
         User(name:"Olivier", category: "User",coorX: 47.996148, coorY: 1.686047),
         User(name:"Reda", category: "User",coorX: 50.928212, coorY: 2.386411),
         User(name:"Julien", category: "User",coorX: 46.910410, coorY: 2.280922),
-        User(name:"Anne", category: "User",coorX:45.995689, coorY: 1.900270),
+        User(name:"Anne", category: "User",coorX:45.995689, coorY: 1.900270),*/
     ]
     var request = [User]()
     static let getInstance = Amis()
@@ -36,7 +36,12 @@ class Amis {
             request = []
         }
     }
-    func add(user: User) {
-        ami.append(user)
+    func add(user: User, str: String) {
+        if (str == "Friends"){
+            ami.append(user)
+        }
+        if(str == "Request"){
+            request.append(user)
+        }
     }
 }
