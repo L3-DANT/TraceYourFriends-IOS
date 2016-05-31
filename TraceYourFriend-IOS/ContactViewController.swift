@@ -8,12 +8,18 @@
 
 import UIKit
 
-class ContactViewController: UITableViewController {
+protocol ContactViewControllerDelegate : NSObjectProtocol {
+    func centerOnFriend1(user: User)
+}
+
+class ContactViewController: UITableViewController, DetailViewControllerDelegate {
     
     var filteredUsers = [User]()
     var detailViewController: DetailViewController? = nil
     let searchController = UISearchController(searchResultsController: nil)
     var users = [User]()
+    
+    weak var delegate : ContactViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +44,11 @@ class ContactViewController: UITableViewController {
         
         filterContentForSearchText("")
     }
-
+    
+    func centerOnFriend(user: User) {
+        delegate?.centerOnFriend1(user)
+    }
+    
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredUsers = users.filter { user in
             let categoryMatch = (scope == "All") || (user.category == scope)
@@ -50,15 +60,7 @@ class ContactViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.collapsed
         super.viewWillAppear(animated)
-        
-        var i : Int = 0
-        for ami in users {
-            if ami.category == "NotFriends" {
-                users.removeAtIndex(i)
-            }
-            i+=1
-        }
-        
+        users = Amis.getInstance.ami + Amis.getInstance.request
         tableView.reloadData()
     }
     
@@ -97,6 +99,8 @@ class ContactViewController: UITableViewController {
             let detailNC: UINavigationController = (segue.destinationViewController as? UINavigationController)!
             let detailVC: DetailViewController? = detailNC.topViewController as! DetailViewController?
             
+            detailVC!.delegate = self;
+            
             if let indexPath = tableView.indexPathForSelectedRow {
                 let user: User
                 if searchController.active{
@@ -110,7 +114,6 @@ class ContactViewController: UITableViewController {
             }
         }
     }
- 
 }
 extension ContactViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {

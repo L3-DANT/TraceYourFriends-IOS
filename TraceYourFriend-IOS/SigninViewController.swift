@@ -123,9 +123,14 @@ class SigninViewController: UIViewController {
                 
                 print("le POST: " + postString)
                 
+                dispatch_async(dispatch_get_main_queue(), {
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
+                    self.presentViewController(vc, animated: true, completion: nil)
+                })
                 if(postString == "200"){
-                    self.displayErrorMessage("Féliciation! votre compte a été créé avec succès")
                 }
+                
+                
                 
                 self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
                 
