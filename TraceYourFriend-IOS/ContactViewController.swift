@@ -64,6 +64,12 @@ class ContactViewController: UITableViewController, DetailViewControllerDelegate
         tableView.reloadData()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        clearsSelectionOnViewWillAppear = splitViewController!.collapsed
+        super.viewDidAppear(animated)
+        users = Amis.getInstance.ami + Amis.getInstance.request
+        tableView.reloadData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

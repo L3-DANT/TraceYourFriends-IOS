@@ -215,7 +215,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             
             if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
                 
-                //print("le POST trace :" + postString)
+                print("le POST trace :" + postString)
                 
                 if (postString == "[]"){
                     
@@ -228,10 +228,8 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
                         request[i] = request[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         request[i] = request[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         request[i] = request[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                        if (i != 0){
-                            user = User(name: request[i], category: "Request", coorX: 0, coorY: 0)
-                            ami.add(user, str: "Request")
-                        }
+                        user = User(name: request[i], category: "Request", coorX: 0, coorY: 0)
+                        ami.add(user, str: "Request")
                     }
                 }
                 self.performSelectorOnMainThread(#selector(TraceController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
