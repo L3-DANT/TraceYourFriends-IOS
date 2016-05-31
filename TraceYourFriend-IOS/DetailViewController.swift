@@ -81,6 +81,9 @@ class DetailViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()

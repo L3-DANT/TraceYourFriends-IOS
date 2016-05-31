@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import MapKit
 
 class User {
     var name : String
     var category : String
     var coorX : Double
     var coorY : Double
+    var dropPin = MKPointAnnotation()
     
     init(name: String, category: String, coorX: Double, coorY : Double){
         self.name = name
