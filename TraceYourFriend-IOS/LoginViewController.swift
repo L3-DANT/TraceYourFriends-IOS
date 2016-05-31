@@ -94,7 +94,7 @@ class LoginViewController: UIViewController {
                     var friends = postString.characters.split{$0 == ","}.map(String.init)
                     let ami: Amis = Amis.getInstance
                     var user :User
-                    ami.deleteAll("All")
+                    ami.deleteAll([], str: "All")
                     for i in 0...friends.count-1 {
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)

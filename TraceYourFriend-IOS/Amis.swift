@@ -28,13 +28,47 @@ class Amis {
         }
         return nil
     }
-    func deleteAll(str : String) {
-        if (str == "Friends" || str == "All"){
-            ami = []
+    func deleteAll(tab : Array<String>, str: String) -> Array<User>{
+        var listAno : Array<User> = []
+        var bool : Bool = true
+        var cpt : Int = 0
+        var i : User
+        var t : String
+        if str == "Friends"{
+            for i in ami {
+                for t in tab {
+                    if i.name == t {
+                        bool = false
+                    }
+                }
+                if bool {
+                    listAno.append(i)
+                    ami.removeAtIndex(cpt)
+                }
+                cpt += 1
+            }
+            return listAno
         }
-        if(str == "Request" || str == "All"){
+        if str == "Request" {
+            for i in request {
+                for t in tab {
+                    if i.name == t {
+                        bool = false
+                    }
+                }
+                if bool {
+                    listAno.append(i)
+                    request.removeAtIndex(cpt)
+                }
+                cpt += 1
+            }
+            return listAno
+        }
+        if str == "All" {
+            ami = []
             request = []
         }
+        return listAno
     }
     func add(user: User, str: String) {
         if (str == "Friends"){

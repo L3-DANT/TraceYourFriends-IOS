@@ -8,16 +8,42 @@
 
 import UIKit
 import MapKit
+import PusherSwift
 
 class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, OptionControllerDelegate, ContactViewControllerDelegate {
     
     @IBOutlet weak var mapKit: MKMapView!
     var locationManager: CLLocationManager!
     var location: CLLocation!
+    var pusher : Pusher!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pusher = Pusher(
+            key:"e19d3311d6540da19604"
+        )
+        
+        let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
+        let channel = self.pusher.subscribe(name)
+        let ami: Amis = Amis.getInstance
+        
+        channel.bind("coorX/coorY", callback: { (data: AnyObject?) -> Void in
+            let datas = String(data)
+            var coor = datas.characters.split{$0 == "/"}.map(String.init)
+            var bin = coor[0].characters.split{$0 == "\""}.map(String.init)
+            let name = bin[1]
+            let coorY = coor[2].characters.split{$0 == "\""}.map(String.init)[0]
+            for i in 0...ami.ami.count-1{
+                if ami.ami[i].name == name{
+                    ami.ami[i].coorX = Double(coor[1])!
+                    ami.ami[i].coorY = Double(coorY)!
+                    self.showFriends()
+                }
+            }
+        })
+        self.pusher.connect()
+        
         mapKit.setUserTrackingMode(.Follow, animated: true)
         mapKit.delegate = self
         
@@ -38,7 +64,26 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
                  NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(TraceController.updateCoor), userInfo: nil, repeats: true)
             }
         })
+        
+        let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+        if (b) {
+            let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
+            sendJsonFriend(name)
+            dispatch_async(dispatch_get_main_queue(), {
+                NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: #selector(TraceController.sendJsonWN), userInfo: nil, repeats: true)
+            })
+        }
     }
+    
+    func sendJsonWN(){
+        let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
+        let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+        
+        if(b){
+            sendJsonFriend(name)
+        }
+    }
+
     
     func centerOnFriend1(user: User) {
         let userLocation: CLLocationCoordinate2D =  CLLocationCoordinate2D(latitude: user.coorX, longitude: user.coorY)
@@ -105,16 +150,17 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     }
     
     func showFriends(){
+        
         for ami in Amis.getInstance.ami {
             let friendLocation = CLLocationCoordinate2DMake(ami.coorX, ami.coorY)
-            // Drop a pin
-            let dropPin = MKPointAnnotation()
+            let dropPin = ami.dropPin
             dropPin.coordinate = friendLocation
             dropPin.title = ami.name
             dropPin.subtitle = ami.category
             mapView(mapKit, viewForAnnotation: dropPin)!.annotation = dropPin
-            mapKit.addAnnotation(dropPin)
-            
+            if !(ami.coorX == 0.0 && ami.coorY == 0.0) {
+                mapKit.addAnnotation(dropPin)
+            }
         }
         
     }
@@ -215,7 +261,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
             
             if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
                 
-                print("le POST trace :" + postString)
+                //print("le POST trace :" + postString)
                 
                 if (postString == "[]"){
                     
@@ -223,14 +269,25 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
                     var request = postString.characters.split{$0 == ","}.map(String.init)
                     let ami : Amis = Amis.getInstance
                     var user :User
-                    ami.deleteAll("Request")
                     for i in 0...request.count-1 {
                         request[i] = request[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         request[i] = request[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
                         request[i] = request[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                        user = User(name: request[i], category: "Request", coorX: 0, coorY: 0)
-                        ami.add(user, str: "Request")
                     }
+                    ami.deleteAll(request, str: "Request")
+                    for i in 0...request.count-1 {
+                        var bool : Bool = true
+                        for t in ami.request{
+                            if(t.name == request[i]){
+                                bool = false
+                            }
+                        }
+                        if (bool){
+                            user = User(name: request[i], category: "Request", coorX: 0, coorY: 0)
+                            ami.add(user, str: "Request")
+                        }
+                    }
+
                 }
                 self.performSelectorOnMainThread(#selector(TraceController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
             }
@@ -238,7 +295,94 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         
     }
     
-    func updatePostLabel(str : String)  {
+    func sendJsonFriend(name : String){
+        //Envoi les données de log in
+        
+        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/listFriend"
+        
+        let url = NSURL(string: postEndpoint)!
+        
+        let session = NSURLSession.sharedSession()
+        
+        let postParams : [String: AnyObject] = ["mail": name]
+        
+        
+        
+        let request = NSMutableURLRequest(URL: url)
+        
+        request.HTTPMethod = "POST"
+        
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions())
+            
+            
+            
+        } catch {
+            
+            print("ERROR: TabBar Controller")
+            
+        }
+        
+        
+        session.dataTaskWithRequest(request, completionHandler: { ( data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            
+            guard let realResponse = response as? NSHTTPURLResponse where
+                
+                realResponse.statusCode == 200 else {
+                    
+                    print("ERROR 2 : TabBar Controller")
+                    
+                    return
+                    
+            }
+            
+            if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
+                
+                //print("le POST ami: " + postString)
+                if (postString == "[]"){
+                    
+                }else{
+                    var friends = postString.characters.split{$0 == ","}.map(String.init)
+                    let ami : Amis = Amis.getInstance
+                    var user :User
+                    for i in 0...friends.count-1 {
+                        friends[i] = friends[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        friends[i] = friends[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        friends[i] = friends[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    }
+                    let list = ami.deleteAll(friends, str: "Friends")
+                    if (!list.isEmpty){
+                        for i in 0...list.count-1{
+                            self.mapKit.removeAnnotation(list[i].dropPin)
+                        }
+                    }
+                    for i in 0...friends.count-1 {
+                        var bool : Bool = true
+                        for t in ami.ami{
+                            if(t.name == friends[i]){
+                                bool = false
+                            }
+                        }
+                        if (bool){
+                            if (i != 0){
+                                user = User(name: friends[i], category: "Friends", coorX: 0, coorY: 0)
+                                ami.add(user, str: "Friends")
+                            }
+                        }
+                    }
+                    
+                }
+                self.performSelectorOnMainThread(#selector(TraceController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
+            }
+            
+        }).resume()
+        
+    }
+    func updatePostLabel(postString: String) {
+        
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
