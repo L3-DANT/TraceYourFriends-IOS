@@ -59,6 +59,7 @@ class DetailViewController: UIViewController {
     @IBAction func acceptRequest(sender: AnyObject) {
         if detailUser?.category == "Request" {
             message("You just added as friend " + detailUser!.name)
+            Amis.getInstance.request.removeAll()
             sendJson((detailUser!.name), bool: true)
             viewDidLoad()
         }else{
@@ -71,8 +72,8 @@ class DetailViewController: UIViewController {
     //Decline request or delete the user if he's already a friend or favorite
     @IBAction func declineRequest(sender: AnyObject) {
         if detailUser?.category == "Request" {
-            sendJson((detailUser!.name), bool: false)
             message("You declined " + detailUser!.name)
+            sendJson((detailUser!.name), bool: false)
             viewDidLoad()
         }else{
             message("You removed " + detailUser!.name)

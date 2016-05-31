@@ -33,7 +33,7 @@ class TabBarController: UITabBarController {
             let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
             sendJson(name)
             dispatch_async(dispatch_get_main_queue(), {
-                NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(TabBarController.sendJsonWN), userInfo: nil, repeats: true)
+                NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: #selector(TabBarController.sendJsonWN), userInfo: nil, repeats: true)
             })
         }
         
