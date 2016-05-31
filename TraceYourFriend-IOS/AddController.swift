@@ -55,7 +55,7 @@ class AddController: UITableViewController {
         //Request
         let indexPath = tableView.indexPathForSelectedRow
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/invite"
+        let postEndpoint: String = "http://134.157.123.196:8080/TraceYourFriends/api/users/invite"
         
         let url = NSURL(string: postEndpoint)!
         
@@ -113,7 +113,7 @@ class AddController: UITableViewController {
     }
    func searchBarUsers(searchText: String) {
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/search/contact"
+        let postEndpoint: String = "http://134.157.123.196:8080/TraceYourFriends/api/users/search/contact"
         
         let url = NSURL(string: postEndpoint)!
         

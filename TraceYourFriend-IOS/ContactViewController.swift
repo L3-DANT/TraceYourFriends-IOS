@@ -8,18 +8,13 @@
 
 import UIKit
 
-protocol ContactViewControllerDelegate : NSObjectProtocol {
-    func centerOnFriend1(user: User)
-}
-
-class ContactViewController: UITableViewController, DetailViewControllerDelegate {
+class ContactViewController: UITableViewController {
     
     var filteredUsers = [User]()
     var detailViewController: DetailViewController? = nil
     let searchController = UISearchController(searchResultsController: nil)
     var users = [User]()
     
-    weak var delegate : ContactViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +38,6 @@ class ContactViewController: UITableViewController, DetailViewControllerDelegate
         searchController.searchBar.delegate = self
         
         filterContentForSearchText("")
-    }
-    
-    func centerOnFriend(user: User) {
-        delegate?.centerOnFriend1(user)
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
@@ -104,8 +95,6 @@ class ContactViewController: UITableViewController, DetailViewControllerDelegate
         if (segue.identifier == "toDetailView"){
             let detailNC: UINavigationController = (segue.destinationViewController as? UINavigationController)!
             let detailVC: DetailViewController? = detailNC.topViewController as! DetailViewController?
-            
-            detailVC!.delegate = self;
             
             if let indexPath = tableView.indexPathForSelectedRow {
                 let user: User

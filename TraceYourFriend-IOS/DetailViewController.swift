@@ -11,9 +11,6 @@
 import UIKit
 import MapKit
 
-protocol DetailViewControllerDelegate : NSObjectProtocol {
-    func centerOnFriend(user : User)
-}
 
 class DetailViewController: UIViewController {
     
@@ -24,8 +21,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var declineButton: UIButton!
     
     var mapDetail = MKMapView()
-    
-    weak var delegate : DetailViewControllerDelegate?
     
     var detailUser: User? {
         didSet {
@@ -39,7 +34,7 @@ class DetailViewController: UIViewController {
                 if detailUser.category == "Friends" {
                     detailDescriptionLabel.text = "Profile of : " + detailUser.name
                     title = detailUser.name
-                    acceptButton.setTitle("Trace " + detailUser.name, forState: .Normal)
+                    acceptButton.setTitle("Edit Profile of " + detailUser.name, forState: .Normal)
                     declineButton.setTitle("Remove " + detailUser.name, forState: .Normal)
                 }else if detailUser.category == "Request"{
                     detailDescriptionLabel.text = "Would you like to accept : " + detailUser.name + " ?"
@@ -47,7 +42,7 @@ class DetailViewController: UIViewController {
                 }else if detailUser.category == "Favorite"{
                     detailDescriptionLabel.text = "Profile of your favorite friend : " + detailUser.name
                     title = detailUser.name
-                    acceptButton.setTitle("Trace " + detailUser.name, forState: .Normal)
+                    acceptButton.setTitle("Edit Profile of " + detailUser.name, forState: .Normal)
                     declineButton.setTitle("Remove " + detailUser.name, forState: .Normal)
                 }
             }
@@ -63,7 +58,7 @@ class DetailViewController: UIViewController {
             sendJson((detailUser!.name), bool: true)
             viewDidLoad()
         }else{
-            self.delegate?.centerOnFriend(detailUser!)
+            //TODO Edite profile
         }
         
     }
@@ -98,7 +93,7 @@ class DetailViewController: UIViewController {
     func sendJson(nameAmi: String, bool: Bool){
         //Envoi des informations d'enregistrement au serveur
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/request"
+        let postEndpoint: String = "http://134.157.123.196:8080/TraceYourFriends/api/users/request"
         
         let url = NSURL(string: postEndpoint)!
         
@@ -171,7 +166,7 @@ class DetailViewController: UIViewController {
         //Envoi des informations d'enregistrement au serveur
         
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/delete"
+        let postEndpoint: String = "http://134.157.123.196:8080/TraceYourFriends/api/users/delete"
         
         let url = NSURL(string: postEndpoint)!
         

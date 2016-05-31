@@ -51,6 +51,7 @@
                     <tabBarItem key="tabBarItem" title="Maps" image="compass" id="gaP-fI-flc"/>
                     <connections>
                         <outlet property="mapKit" destination="ex6-Rn-okV" id="wFa-Vk-bqF"/>
+                        <outlet property="searchBar" destination="sr3-Sg-pHD" id="Cxa-Ix-TNR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVh-wn-iJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
         
         //Envoi les données de log in
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/connexion"
+        let postEndpoint: String = "http://134.157.123.196:8080/TraceYourFriends/api/users/connexion"
         
         let url = NSURL(string: postEndpoint)!
         
