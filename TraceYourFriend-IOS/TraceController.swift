@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import PusherSwift
 
-class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, OptionControllerDelegate, ContactViewControllerDelegate {
+class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, OptionControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var mapKit: MKMapView!
     var locationManager: CLLocationManager!
@@ -18,8 +18,13 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     var pusher : Pusher!
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchBar.delegate = self
+        
         pusher = Pusher(
             key:"e19d3311d6540da19604"
         )
@@ -75,6 +80,14 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         }
     }
     
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        for ami in Amis.getInstance.ami {
+            if searchText == ami.name {
+                centerOnFriend1(ami)
+            }
+        }
+    }
+    
     func sendJsonWN(){
         let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
         let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
@@ -84,6 +97,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         }
     }
 
+    
     
     func centerOnFriend1(user: User) {
         let userLocation: CLLocationCoordinate2D =  CLLocationCoordinate2D(latitude: user.coorX, longitude: user.coorY)
@@ -219,7 +233,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     func sendJson(name: String, coorX: Double, coorY: Double){
         
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/coord"
+        let postEndpoint: String = "http://134.157.123.196:8080/TraceYourFriends/api/users/coord"
         
         let url = NSURL(string: postEndpoint)!
         
@@ -298,7 +312,7 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     func sendJsonFriend(name : String){
         //Envoi les données de log in
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/listFriend"
+        let postEndpoint: String = "http://134.157.123.196:8080/TraceYourFriends/api/users/listFriend"
         
         let url = NSURL(string: postEndpoint)!
         
@@ -397,6 +411,5 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         mapKit.setRegion(coordinateRegion, animated: true)
     }
 }
-
 
 

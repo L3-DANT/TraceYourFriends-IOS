@@ -78,7 +78,7 @@ class SigninViewController: UIViewController {
         //Envoi des informations d'enregistrement au serveur
         
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/inscription"
+        let postEndpoint: String = "http://134.157.123.196:8080/TraceYourFriends/api/users/inscription"
         
         let url = NSURL(string: postEndpoint)!
         
