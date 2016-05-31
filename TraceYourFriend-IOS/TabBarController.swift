@@ -24,7 +24,7 @@ class TabBarController: UITabBarController {
 
         // Do any additional setup after loading the view.
         let traceController = self.viewControllers?[0] as? TraceController
-        let detailController = self.viewControllers?[1] as? DetailViewController
+        let detailController = self.viewControllers?[1] as? ContactViewController
         let optionsController = self.viewControllers?[2] as? OptionController
         optionsController?.delegate = traceController
         detailController?.delegate = traceController
@@ -40,14 +40,17 @@ class TabBarController: UITabBarController {
     }
     func sendJsonWN(){
         let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
-        sendJson(name)
+        let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+        
+        if(b){
+            sendJson(name)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         isUserLogIn = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")

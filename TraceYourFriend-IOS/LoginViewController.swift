@@ -84,7 +84,7 @@ class LoginViewController: UIViewController {
                 
                 print("le POST: " + postString)
                 
-                if(postString != "null"){
+                if(postString != "[]"){
                     //Then LogIn is successfully done
                     NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLogIn")
                     NSUserDefaults.standardUserDefaults().setValue(userEmail, forKey: "myName")

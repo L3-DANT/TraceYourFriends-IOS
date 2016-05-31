@@ -50,18 +50,21 @@ class AddController: UITableViewController {
         
 
     }
-   /* override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //Request
         let indexPath = tableView.indexPathForSelectedRow
         
-        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/invite"
+        let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/invite"
         
         let url = NSURL(string: postEndpoint)!
         
         let session = NSURLSession.sharedSession()
         
-        let postParams : [String: AnyObject] = [:]
+        let nameAmi = users[indexPath!.row].name
+        let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
+        let postParams : [String: AnyObject] = ["name": name, "nameAmi": nameAmi]
+
         
         let request = NSMutableURLRequest(URL: url)
         
@@ -72,8 +75,6 @@ class AddController: UITableViewController {
         do {
             
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions())
-            
-            
             
         } catch {
             
@@ -97,13 +98,19 @@ class AddController: UITableViewController {
             if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
                 
                 print("le POST: " + postString)
-                self.performSelectorOnMainThread(#selector(SigninViewController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
+                
+                if(postString == "200"){
+                    self.message("L'envoie d'invitation s'est effectué avec succes")
+                }
+                
+            
+                self.performSelectorOnMainThread(#selector(AddController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
                 
             }
             
         }).resume()
         
-    }*/
+    }
    func searchBarUsers(searchText: String) {
         
         let postEndpoint: String = "http://localhost:8080/TraceYourFriends/api/users/search/contact"
@@ -150,7 +157,16 @@ class AddController: UITableViewController {
             if let postString = NSString(data:data!, encoding: NSUTF8StringEncoding) as? String {
                 
                 print("le POST recherche: " + postString)
-                
+                var u :User
+                self.users.removeAll()
+                var poeple = postString.characters.split{$0 == ","}.map(String.init)
+                for i in 0...poeple.count-1 {
+                    poeple[i] = poeple[i].stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    poeple[i] = poeple[i].stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    poeple[i] = poeple[i].stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    u = User(name: poeple[i], category: "", coorX: 0.0, coorY: 0.0  )
+                    self.users.append(u)
+                }
                 self.performSelectorOnMainThread(#selector(AddController.updatePostLabel(_:)), withObject: postString, waitUntilDone: false)
             }
             
@@ -165,15 +181,31 @@ class AddController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func message(userMessage:String){
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            let myAlert = UIAlertController(title: "Alert", message:userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
+            
+            myAlert.addAction(okAction)
+            
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        })
+    }
+
 }
 
 extension AddController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         var str : String
         str = searchController.searchBar.text!
-        if str.characters.count > 3 {
+        if str.characters.count > 1 {
             filterContentForSearchText(str)
             searchBarUsers(str)
+        }else{
+            self.users.removeAll()
         }
+        tableView.reloadData()
     }
 }

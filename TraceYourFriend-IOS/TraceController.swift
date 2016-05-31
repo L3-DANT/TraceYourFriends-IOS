@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, OptionControllerDelegate, DetailViewControllerDelegate {
+class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, OptionControllerDelegate, ContactViewControllerDelegate {
     
     @IBOutlet weak var mapKit: MKMapView!
     var locationManager: CLLocationManager!
@@ -32,8 +32,18 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         showFriends()
         
         dispatch_async(dispatch_get_main_queue(), {
-            NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(TraceController.updateCoor), userInfo: nil, repeats: true)
+            let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
+
+            if(b){
+                 NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(TraceController.updateCoor), userInfo: nil, repeats: true)
+            }
         })
+    }
+    
+    func centerOnFriend1(user: User) {
+        let userLocation: CLLocationCoordinate2D =  CLLocationCoordinate2D(latitude: user.coorX, longitude: user.coorY)
+        centerMapOnLocation(userLocation)
+
     }
     
     func changeMapDisplayMode() {
@@ -93,10 +103,6 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
         
         presentViewController(actionSheet, animated: true, completion: nil)
     }
-    func centerOnFriend(user: User) {
-        let userLocation: CLLocationCoordinate2D =  CLLocationCoordinate2D(latitude: user.coorX, longitude: user.coorY)
-        centerMapOnLocation(userLocation)
-    }
     
     func showFriends(){
         for ami in Amis.getInstance.ami {
@@ -149,10 +155,12 @@ class TraceController: UIViewController, CLLocationManagerDelegate, MKMapViewDel
     func updateCoor() {
         let b = NSUserDefaults.standardUserDefaults().boolForKey("isUserLogIn")
         let name = NSUserDefaults.standardUserDefaults().valueForKey("myName") as! String
-        if b && CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse{
-            sendJson(name, coorX: location.coordinate.latitude as Double, coorY: location.coordinate.longitude as Double)
-        }else{
-            sendJson(name, coorX: 0.0, coorY: 0.0)
+        if b {
+            if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse{
+                sendJson(name, coorX: location.coordinate.latitude as Double, coorY: location.coordinate.longitude as Double)
+            }else{
+                sendJson(name, coorX: 0.0, coorY: 0.0)
+            }
         }
     }
     
